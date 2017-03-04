@@ -56,8 +56,12 @@
                         @else
 
                             <li>
+                            @if(\Illuminate\Support\Facades\Auth::user()->profile)
+                                    <a href="{{ route('addProfileDetails') }}">Edit Details</a>
 
-                                <a href="{{ route('addProfileDetails') }}">Add Details</a>
+                            @else
+                                    <a href="{{ route('addProfileDetails') }}">Add Details</a>
+                            @endif
                             </li>
                             <li class="dropdown">
                                 <a href="{{ url('home') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
