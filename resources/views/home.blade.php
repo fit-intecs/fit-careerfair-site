@@ -14,7 +14,19 @@
                                     <div class="col-md-5">
 
                                         <h3>{{ $profileDetails->firstName . " " . $profileDetails->lastName}}</h3>
-                                        <img src="#" style="border: 1px solid #778899; height: 200px; width: 200px;">
+
+                                        @if (\Illuminate\Support\Facades\Storage::disk('local')->has(Auth::user()->name  . '.jpg'))
+                                            {{--<section class="row new-post">--}}
+
+                                                <img src="{{ route('profile.image', ['filename' => Auth::user()->name . '.jpg']) }}" alt="" class="img-responsive">
+
+                                            {{--</section>--}}
+                                        @elseif (!\Illuminate\Support\Facades\Storage::disk('local')->has(Auth::user()->name . '.jpg'))
+
+                                                <img src="{{ route('profile.image', ['filename' => 'annony' . '-' . '0' . '.jpg']) }}" alt="" class="img-responsive">
+                                        @endif
+
+                                         {{--<img src="#" style="border: 1px solid #778899; height: 200px; width: 200px;">--}}
                                     </div>
                                     <div class="col-md-5 col-md-offset-1" style="margin-top: 50px;">
                                         <h5><strong>Full Name: </strong></h5> <p>{{ $profileDetails->firstName . " " . $profileDetails->lastName}}</p>

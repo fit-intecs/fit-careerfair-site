@@ -54,7 +54,6 @@
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                         @else
-
                             <li>
                             @if(\Illuminate\Support\Facades\Auth::user()->profile)
                                     <a href="{{ route('addProfileDetails') }}">Edit Details</a>

@@ -47,6 +47,14 @@
     color: green;
 }
 
+img {
+    display: block;
+    max-width:170px;
+    max-height:200px;
+    width: auto;
+    height: auto;
+}
+
 /*.bgimg {*/
     /*background-image: url('../images/FotorCreated.jpg');*/
     /*background-repeat: no-repeat;*/
