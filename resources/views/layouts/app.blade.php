@@ -37,8 +37,9 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'FIT-Career Fair 2017') }}
+                    <a class="" href="{{ url('/') }}">
+                        <img style="display: inline;" src="{{ url('/img/mora_logo.png') }}" class="">
+                        <div class="" style="display: inline-block; color: #001714"> {{ config('app.name', 'FIT-Career Fair 2017') }} </div>
                     </a>
                 </div>
 
