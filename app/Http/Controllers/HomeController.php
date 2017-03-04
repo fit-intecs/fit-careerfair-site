@@ -27,6 +27,8 @@ class HomeController extends Controller
         if(Auth::user()->status == 'first_time'){
             return redirect('/register');
         }
-        return view('home');
+
+        $profile = Auth::user()->profile;
+        return view('home',["profileDetails"=>$profile]);
     }
 }

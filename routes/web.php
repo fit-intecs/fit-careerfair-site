@@ -49,6 +49,6 @@ Route::group(['middleware' => ['auth']], function () {
      * */
 
     $this->get('addprofiledetails', 'UserController@getAddUserProfileDetails')->name('addProfileDetails');
-
+    $this->post('profiledetails', 'UserController@postAddUserProfileDetails')->name('postProfileDetails');
 
 });
