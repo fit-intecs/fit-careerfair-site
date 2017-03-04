@@ -24,7 +24,6 @@ class SocialAuthController extends Controller
         // whole driver, not only the user. So no more ->user() part
 
         $prov = Socialite::driver($provider);
-        var_dump($prov);
         $tmpUser = $prov->user();
         $token = $tmpUser->token;
 
