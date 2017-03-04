@@ -59,6 +59,7 @@ class SocialAuthController extends Controller
             $isFollowing = ($connection == 'following')? true: false;
         }
 
+        dd($tmpUser);
         if ($isFollowing){  //Check user following any white listed twitter account
             $user = $service->createOrGetUser($prov,$tmpUser);
             auth()->login($user);
