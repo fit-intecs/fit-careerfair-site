@@ -34,12 +34,12 @@ class SocialAccountService
                 'provider' => $providerName
             ]);
 
-            $user = User::whereEmail($providerUser->getEmail())->first();
+            $user = User::whereEmail($providerUser->getId())->first(); //until twitter accept our app to get user email address will use user id
 
             if (!$user) {
 
                 $user = User::create([
-                    'email' => $providerUser->getEmail(),
+                    'email' => $providerUser->getId(),
                     'password' => bcrypt(str_random()),
                     'name' => $providerUser->getName(),
                     'status' => 'first_time',
