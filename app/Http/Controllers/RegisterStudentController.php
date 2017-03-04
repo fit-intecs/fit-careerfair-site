@@ -16,6 +16,8 @@ class RegisterStudentController extends Controller
         $user->status = 'active';
 
         $user->save();
-        return redirect('/home');
+
+        $profileDetails = $user->profile;
+        return redirect()->route('home',["profileDetails"=>$profileDetails ]);
     }
 }

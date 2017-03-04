@@ -29,7 +29,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/callback/{provider}', 'SocialAuthController@callback');
 Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
@@ -43,5 +43,12 @@ Route::group(['middleware' => ['auth']], function () {
     })->name('register');
 
     $this->post('register','RegisterStudentController@update')->name('register');
+
+    /*
+     * User Profile related Routes
+     * */
+
+    $this->get('addprofiledetails', 'UserController@getAddUserProfileDetails')->name('addProfileDetails');
+    $this->post('profiledetails', 'UserController@postAddUserProfileDetails')->name('postProfileDetails');
 
 });
