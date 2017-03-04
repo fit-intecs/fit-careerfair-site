@@ -56,7 +56,7 @@
                         @else
                             <li>
                             @if(\Illuminate\Support\Facades\Auth::user()->profile)
-                                    <a href="{{ route('addProfileDetails') }}">Edit Details</a>
+                                    <a href="#" class="edit">Edit Details</a>
 
                             @else
                                     <a href="{{ route('addProfileDetails') }}">Add Details</a>
@@ -98,5 +98,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ URL::to('js/main.js') }}"></script>
 </body>
 </html>
