@@ -27,7 +27,6 @@ class SocialAuthController extends Controller
         $tmpUser = $prov->user();
         $token = $tmpUser->token;
 
-        var_dump($token);
         $stack = HandlerStack::create();
 
         $middleware = new Oauth1([
