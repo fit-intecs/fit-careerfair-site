@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'FIT-Careeer Fair 2017',
+    'name' => 'FIT-Career Fair 2k17',
 
     /*
     |--------------------------------------------------------------------------

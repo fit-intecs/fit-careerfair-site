@@ -8,9 +8,11 @@
                 <div class="panel-heading">My Profile</div>
 
                 <div class="panel-body">
+                    @if($profileDetails)
                     <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-5">
+
                                 <h3>{{ $profileDetails->firstName . " " . $profileDetails->lastName}}</h3>
                                 <img src="#" style="border: 1px solid #778899; height: 200px; width: 200px;">
                             </div>
@@ -35,8 +37,10 @@
                             <h5><strong>Technical Skills</strong></h5>
                             <p>{{ $profileDetails->techs }}</p>
                         </div>
-
                     </div>
+                        @else
+                        <h3>Please update your profile details!</h3>
+                        @endif
                 </div>
             </div>
         </div>
