@@ -40,7 +40,7 @@
                 @if (Route::has('login'))
 
                     @if (Auth::check())
-                        <li><a href="#">Home</a></li>
+                        <li><a href="{{ url('/home') }}">Home</a></li>
                     @else
                         <li><a href="#">Companies</a></li>
 
