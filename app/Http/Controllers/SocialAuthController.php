@@ -27,6 +27,7 @@ class SocialAuthController extends Controller
         $tmpUser = $prov->user();
         $token = $tmpUser->token;
 
+        var_dump($token);
         $stack = HandlerStack::create();
 
         $middleware = new Oauth1([
@@ -59,7 +60,6 @@ class SocialAuthController extends Controller
             $isFollowing = ($connection == 'following')? true: false;
         }
 
-        dd($tmpUser);
         if ($isFollowing){  //Check user following any white listed twitter account
             $user = $service->createOrGetUser($prov,$tmpUser);
             auth()->login($user);
