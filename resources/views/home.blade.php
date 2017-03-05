@@ -15,9 +15,9 @@
 
                                         <h3>{{ $profileDetails->firstName . " " . $profileDetails->lastName}}</h3>
 
-                                        @if (\Illuminate\Support\Facades\Storage::disk('local')->has(Auth::user()->name  . '.jpg'))
+                                        @if (\Illuminate\Support\Facades\Storage::disk('local')->has(\Illuminate\Support\Str::upper(Auth::user()->name)  . '.jpg'))
 
-                                                <img src="{{ route('profile.image', ['filename' => Auth::user()->name . '.jpg']) }}" alt="" class="img-responsive">
+                                                <img src="{{ route('profile.image', ['filename' => \Illuminate\Support\Str::upper(Auth::user()->name) . '.jpg']) }}" alt="" class="img-responsive">
 
                                         @else
                                                 <img src="/img/default-user.png" class="img-responsive">
