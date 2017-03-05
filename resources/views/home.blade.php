@@ -4,17 +4,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">My Profile</div>
 
                 <div class="panel-body">
                     @if($profileDetails)
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="col-md-5">
+                                    <div class="col-md-4">
 
-                                        <h3>{{ $profileDetails->firstName . " " . $profileDetails->lastName}}</h3>
-
+                                        <div class="row" style="margin-left: 10px;">
+                                        <h3><div id="firstName">{{ $profileDetails->firstName }}</div> <div id="lastName"> {{$profileDetails->lastName}}</div></h3>
+                                        </div>
                                         @if (\Illuminate\Support\Facades\Storage::disk('local')->has(\Illuminate\Support\Str::upper(Auth::user()->name)  . '.jpg'))
 
                                                 <img src="{{ route('profile.image', ['filename' => \Illuminate\Support\Str::upper(Auth::user()->name) . '.jpg']) }}" alt="" class="img-responsive">
@@ -25,29 +26,58 @@
 
                                     </div>
 
-                                    <div class="col-md-5 col-md-offset-1" style="margin-top: 50px;">
-                                        <h5><strong>First Name: </strong></h5><p id="firstName">{{ $profileDetails->firstName}} </p>
-                                        <h5><strong>Last Name: </strong></h5><p id="lastName">{{ $profileDetails->lastName}} </p>
-                                        <h5><strong>Phone Number: </strong></h5> <p id="phone">{{ $profileDetails->phone }}</p>
-                                        <h5><strong>Degree: </strong></h5> <p id="degree">{{ $profileDetails->degree }}</p>
-                                        <h5><strong>LinkedIn: </strong></h5> <p id="linkedin"><a href="{{ $profileDetails->linkedinLink  }}">{{ $profileDetails->linkedinLink }}</a></p>
-
+                                    <div class="col-md-7 col-md-offset-1" style="margin-top: 70px;">
+                                        <div class="jumbotron" style="margin: 20px; padding: 5px;">
+                                        {{--<div><strong>First Name: </strong></div><p style="font-size: 1em" id="firstName">{{ $profileDetails->firstName}} </p>--}}
+                                        {{--<div><strong>Last Name: </strong></div><p style="font-size: 1em" id="lastName">{{ $profileDetails->lastName}} </p>--}}
+                                        <div><strong>Phone Number: </strong></div> <p style="font-size: 1em" id="phone">{{ $profileDetails->phone }}</p>
+                                        <div><strong>Degree: </strong></div> <p style="font-size: 1em" id="degree">{{ $profileDetails->degree }}</p>
+                                        <div><strong>LinkedIn: </strong></div> <p style="font-size: 1em" id="linkedin"><a href="{{ $profileDetails->linkedinLink  }}">{{ $profileDetails->linkedinLink }}</a></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <h5><strong>Profile</strong></h5>
-                                    <p id="objective">{{ $profileDetails->objective }}</p>
+
+                                    <div class="jumbotron" style="margin: 20px; padding: 5px;">
+                                        <p style="font-size: 1em" id="objective">{{ $profileDetails->objective }}</p>
+                                    </div>
+
                                 </div>
 
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <h5><strong>Technical Skills</strong></h5>
-                                    <p id="techs">{{ $profileDetails->techs }}</p>
+                                    {{--<p id="techs">{{ $profileDetails->techs }}</p>--}}
+                                    <div class="jumbotron" style="margin: 20px; padding: 5px;">
+                                        <p style="font-size: 1em" id="techs">{{ $profileDetails->techs }}</p>
+                                    </div>
                                 </div>
                             </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5><strong>Experience</strong></h5>
+                                {{--<p id="techs">{{ $profileDetails->techs }}</p>--}}
+                                <div class="jumbotron" style="margin: 20px; padding: 5px;">
+                                    <p style="font-size: 1em" id="techs">{{ $profileDetails->techs }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5><strong>Achievements</strong></h5>
+                                {{--<p id="techs">{{ $profileDetails->techs }}</p>--}}
+                                <div class="jumbotron" style="margin: 20px; padding: 5px;">
+                                    <p style="font-size: 1em" id="techs">{{ $profileDetails->techs }}</p>
+                                </div>
+                            </div>
+                        </div>
+
                         @else
                             <h3>Please update your profile details!</h3>
                         @endif
