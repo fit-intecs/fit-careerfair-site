@@ -14,7 +14,6 @@
 }
 
 .posts .post{
-
     padding-left: 10px;
     border-left: 3px solid #c7254e;
     margin-bottom: 30px;
@@ -45,6 +44,14 @@
     border: 1px solid green;
     background-color: greenyellow;
     color: green;
+}
+
+img {
+    display: block;
+    max-width:170px;
+    max-height:200px;
+    width: auto;
+    height: auto;
 }
 
 /*.bgimg {*/

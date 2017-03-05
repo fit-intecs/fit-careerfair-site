@@ -50,5 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     $this->get('addprofiledetails', 'UserController@getAddUserProfileDetails')->name('addProfileDetails');
     $this->post('profiledetails', 'UserController@postAddUserProfileDetails')->name('postProfileDetails');
+    $this->get('/profileimage/{filename}', 'UserController@getUserImage')->name('profile.image');
+
 
 });

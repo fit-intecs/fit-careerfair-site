@@ -37,8 +37,9 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'FIT-Career Fair 2017') }}
+                    <a class="" href="{{ url('/') }}">
+                        <img style="display: inline;" src="{{ url('/img/mora_logo.png') }}" class="">
+                        <div class="" style="display: inline-block; color: #001714"> {{ config('app.name', 'FIT-Career Fair 2017') }} </div>
                     </a>
                 </div>
 
@@ -54,10 +55,13 @@
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                         @else
-
                             <li>
+                            @if(\Illuminate\Support\Facades\Auth::user()->profile)
+                                    <a href="#" class="edit">Edit Details</a>
 
-                                <a href="{{ route('addProfileDetails') }}">Add Details</a>
+                            @else
+                                    <a href="{{ route('addProfileDetails') }}">Add Details</a>
+                            @endif
                             </li>
                             <li class="dropdown">
                                 <a href="{{ url('home') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -95,5 +99,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ URL::to('js/main.js') }}"></script>
 </body>
 </html>

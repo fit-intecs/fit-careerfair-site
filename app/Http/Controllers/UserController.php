@@ -11,7 +11,9 @@ namespace App\Http\Controllers;
 
 use App\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class UserController extends Controller{
@@ -57,5 +59,11 @@ class UserController extends Controller{
         $profile->save();
 
         return redirect()->route('home',['profileDetails'=> $profile]);
+    }
+
+    public function getUserImage($filename)
+    {
+        $file = Storage::disk('local')->get($filename);
+        return new Response($file,200);
     }
 }
