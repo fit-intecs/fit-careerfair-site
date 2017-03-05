@@ -14,7 +14,7 @@
                                     <div class="col-md-5">
 
                                         <h3>{{ $profileDetails->firstName . " " . $profileDetails->lastName}}</h3>
-                                        <img src="#" style="border: 1px solid #778899; height: 200px; width: 200px;">
+                                        <img src="/img/default-user.png" style="border: 1px solid #778899; height: 200px; width: 200px;">
                                     </div>
                                     <div class="col-md-5 col-md-offset-1" style="margin-top: 50px;">
                                         <h5><strong>Full Name: </strong></h5> <p>{{ $profileDetails->firstName . " " . $profileDetails->lastName}}</p>
