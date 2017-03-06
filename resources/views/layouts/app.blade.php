@@ -23,7 +23,8 @@
     </script>
 </head>
 <body>
-    <div id="app">
+
+    <div id="grad">
         <nav class="navbar navbar-default navbar-static-top" style="background-color: #333333">
             <div class="container">
                 <div class="navbar-header">
