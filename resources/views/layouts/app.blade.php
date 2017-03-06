@@ -24,7 +24,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top" style="background-color: #333333">
             <div class="container">
                 <div class="navbar-header">
 
@@ -39,7 +39,7 @@
                     <!-- Branding Image -->
                     <a class="" href="{{ url('/') }}">
                         <img style="display: inline;" src="{{ url('/img/mora_logo.png') }}" class="">
-                        <div class="" style="display: inline-block; color: #001714"> {{ config('app.name', 'FIT-Career Fair 2017') }} </div>
+                        <div class="" style="display: inline-block; color: #ffffff"> {{ config('app.name', 'FIT-Career Fair 2017') }} </div>
                     </a>
                 </div>
 
@@ -57,14 +57,14 @@
                         @else
                             <li>
                             @if(\Illuminate\Support\Facades\Auth::user()->profile)
-                                    <a href="#" class="edit">Edit Details</a>
+                                    <a href="#" class="edit" style="color: #ffffff">Edit Details</a>
 
                             @else
-                                    <a href="{{ route('addProfileDetails') }}">Add Details</a>
+                                    <a href="{{ route('addProfileDetails') }} " style="color: #ffffff">Add Details</a>
                             @endif
                             </li>
                             <li class="dropdown">
-                                <a href="{{ url('home') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <a href="{{ url('home') }}" class="dropdown-toggle" data-toggle="dropdown" style="color: #ffffff" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
