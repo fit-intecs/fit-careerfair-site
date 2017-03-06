@@ -63,7 +63,7 @@
                                 <h5><strong>Experience</strong></h5>
                                 {{--<p id="techs">{{ $profileDetails->techs }}</p>--}}
                                 <div class="jumbotron" style="margin: 20px; padding: 5px;">
-                                    <p style="font-size: 1em" id="techs">{{ $profileDetails->techs }}</p>
+                                    <p style="font-size: 1em" id="exp">not yet</p>
                                 </div>
                             </div>
                         </div>
@@ -73,7 +73,7 @@
                                 <h5><strong>Achievements</strong></h5>
                                 {{--<p id="techs">{{ $profileDetails->techs }}</p>--}}
                                 <div class="jumbotron" style="margin: 20px; padding: 5px;">
-                                    <p style="font-size: 1em" id="techs">{{ $profileDetails->techs }}</p>
+                                    <p style="font-size: 1em" id="achieve">not yet</p>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                     <h4 class="modal-title" id="post-title">Edit Post</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="#">
+                    <form>
                         <div class="form-group">
                             <label for="firstName">First Name</label>
                             <input type="text" class="form-control" id="firstName-modal" aria-describedby="emailHelp" placeholder="Enter First Name" name="firstName">
@@ -149,4 +149,10 @@
     </div>
 
 </div>
+
+<script>
+    var token = '{{ Session::token() }}';
+    var urlEdit = '{{ route('profile.edit') }}';
+</script>
+
 @endsection

@@ -27,3 +27,26 @@ $('.edit').on('click', function(event)
     $('#edit-modal').modal();
 
 });
+
+/*
+* update profile details AJAX request
+*
+ */
+
+$('#modal-save').on('click', function()
+{
+    $.ajax({
+        method: 'POST',
+        url : urlEdit,
+        data : {firstName: $('#firstName-modal').val(),lastName: $('#lastName-modal').val(), phone: $('#phone-modal').val(), degree: $('#degree-modal').val(), linkedin : $('#linkedin-modal').val(),objective: $('#objective-modal').val(),techskills: $('#techskills-modal').val(),_token: token}
+    }).done(function(msg){
+        $('#firstName').text(msg['firstName']);
+        $('#lastName').text(msg['lastName'])
+        $('#phone').text(msg['phone'])
+        $('#degree').val(msg['degree'])
+        $('#linkedin').text(msg['linkedin'])
+        $('#objective').text(msg['objective'])
+        $('#techs').text(msg['techs'])
+        $('#edit-modal').modal('hide');
+    });
+});

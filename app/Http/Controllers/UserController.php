@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\Profile;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -65,5 +66,41 @@ class UserController extends Controller{
     {
         $file = Storage::disk('local')->get($filename);
         return new Response($file,200);
+    }
+
+    public function postEditProfile(Request $request)
+    {
+
+        $this->validate($request,[
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'phone' => 'required',
+            'linkedin' => 'required',
+            'objective' => 'required|min:50|max:500',
+            'techskills' => 'required|max:150'
+        ]);
+
+        $authenticatedUserID = Auth::user()->id;
+        $profileOwnedUser = User::find($authenticatedUserID);
+        $profile = $profileOwnedUser->profile;
+
+        $profile->firstName = $request['firstName'];
+        $profile->lastName = $request['lastName'];
+        $profile->phone = $request['phone'];
+        $profile->degree = $request['degree'];
+        $profile->linkedinLink = $request['linkedin'];
+        $profile->objective = $request['objective'];
+        $profile->techs = $request['techskills'];
+
+        $profile->update();
+        return response()->json(['firstName' => $profile->firstName, 'lastName'=> $profile->lastName, 'phone'=>$profile->phone,
+        'degree'=> $profile->degree, 'linkedin'=>$profile->linkedinLink, 'objective'=> $profile->objective, 'techs'=>$profile->techs],200);
+//        if(Auth::user()!= $post->user)
+//        {
+//            return redirect()->back();
+//        }
+//        $post->body = $request['body'];
+//        $post->update();
+//        return response()->json(['new_body'=> $post->body],200);
     }
 }
