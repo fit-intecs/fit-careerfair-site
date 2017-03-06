@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="col-md-9 col-md-offset-2">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">My Profile Settings</h3>
                 </div>
@@ -48,11 +48,7 @@
                         <label for="techskills">Technical Skills</label>
                         <textarea class="form-control" id="techskills" rows="3" name="techskills"></textarea>
                     </div>
-                <div class="form-group">
-                    <label for="profimage">Profile Image</label>
-                    <input type="file" class="form-control-file" id="profimage" aria-describedby="fileHelp" name="profimage">
-                    <small id="fileHelp" class="form-text text-muted">Add recent image of yours</small>
-                </div>
+
                 <div class="col-md-offset-11">
                 <button type="submit" class="btn btn-primary">Submit</button>
                     <input type="hidden" name="_token" value="{{Session::token()}}">
