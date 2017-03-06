@@ -1,5 +1,3 @@
-var postId=0;
-var postBodyElement= null;
 
 /*
 * edit menu click action
