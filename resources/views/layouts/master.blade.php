@@ -1,6 +1,7 @@
 <html>
 <head>
     <title>@yield('title')</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Fonts -->
     <!-- Material Design fonts -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
