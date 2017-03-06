@@ -16,6 +16,12 @@ $this->get('/', function () {
 })->name('root');
 
 $this->get('/students','StudentController@index')->name('students');
+$this->get('/students/{id}',function($id){
+    $user = \App\User::where('name', $id)->first();
+    $profile = $user->profile;
+    $profile->index = $user->name;
+    return view('publicProfile',["profileDetails"=>$profile]);
+})->name('students_view');
 
 
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');

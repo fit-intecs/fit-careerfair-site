@@ -1,6 +1,24 @@
 @extends('layouts.master')
 
 @section('content')
+
+    <div class="modal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"><i class="fa fa-graduation-cap"></i></h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body…</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div class="container">
     <div class="panel panel-default">
         <div id="student" class="panel-body">
@@ -21,7 +39,7 @@
                                 @foreach(explode(",", $student->techs) as $tech)
                                     <span style="margin-bottom: 10px" class="label label-default">{{$tech}}</span>
                                 @endforeach
-                                <a style="color: #00b0ff; float: right" href="javascript:void(0)" class="btn btn-raised btn-xs">read more</a>
+                                <button type="button" style="color: #00b0ff; float: right" onclick="viewProfile('{{$student->index}}');" class="btn btn-raised btn-xs">read more</button>
                             </div>
                         </div>
                         <div class="list-group-separator"></div>
@@ -42,6 +60,20 @@
 @parent
 {{--<script src="/js/jquery.jscroll.min.js"></script>--}}
     <script>
+        function viewProfile(index){
+            $('.modal').modal('show');
+
+            $.ajax({
+                url: "/students/"+index,
+                type: 'GET',
+                success: function(res) {
+                    $('.modal-body').html(res);
+                    console.log(res);
+                }
+            });
+        }
+///students/
+
 //        $('#student').jscroll({
 //            loadingHtml: '<img src="/img/ajaxloading.gif" alt="Loading" /> Loading...',
 //            padding: 20,

@@ -17,6 +17,7 @@ class StudentController extends Controller
         for($i=0;$i<count($profiles);$i++){
             $profiles[$i]->objective = str_limit($profiles[$i]->objective, $limit = 180, $end = '...');
             $profiles[$i]->img = "/img/student.jpg"; //$faker->imageUrl(50, 50);
+            $profiles[$i]->index = $profiles[$i]->user->name;
         }
 
         $page_data = array(

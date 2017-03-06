@@ -19,8 +19,9 @@
 <body>
 <div>
 
-    @include('includes.header')
-
+    @section('header')
+        @include('includes.header')
+    @show
 
     <div class="container">
         @yield('content')
