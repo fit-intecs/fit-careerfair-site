@@ -41,7 +41,7 @@ $('#modal-save').on('click', function()
         $('#firstName').text(msg['firstName']);
         $('#lastName').text(msg['lastName'])
         $('#phone').text(msg['phone'])
-        $('#degree').val(msg['degree'])
+        $('#degree').text(msg['degree'])
         $('#linkedin').text(msg['linkedin'])
         $('#objective').text(msg['objective'])
         $('#techs').text(msg['techs'])
