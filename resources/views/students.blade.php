@@ -10,7 +10,7 @@
                     <h4 class="modal-title"><i class="fa fa-graduation-cap"></i></h4>
                 </div>
                 <div class="modal-body">
-                    <p>One fine body…</p>
+                    <img src="/img/ajaxloading.gif" class="loading-img" alt="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -62,7 +62,7 @@
     <script>
         function viewProfile(index){
             $('.modal').modal('show');
-
+            $('.modal-body').html('<img src="/img/ajaxloading.gif" class="loading-img" alt="">');
             $.ajax({
                 url: "/students/"+index,
                 type: 'GET',

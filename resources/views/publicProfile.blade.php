@@ -37,7 +37,7 @@
 
                     <div class="panel panel-default" style="margin: 20px; padding: 5px;">
                         <div class="panel-body">
-                            <p style="font-size: 1em" id="objective">{{ $profileDetails->objective }}</p>
+                            <p class="text-justify" style="font-size: 1em" id="objective">{{ $profileDetails->objective }}</p>
                         </div>
                     </div>
 
@@ -50,7 +50,9 @@
                     {{--<p id="techs">{{ $profileDetails->techs }}</p>--}}
                     <div class="panel panel-default" style="margin: 20px; padding: 5px;">
                         <div class="panel-body">
-                            <p style="font-size: 1em" id="techs">{{ $profileDetails->techs }}</p>
+                            @foreach(explode(",", $profileDetails->techs) as $tech)
+                                <span style="margin-bottom: 10px" class="label label-default">{{$tech}}</span>
+                            @endforeach
                         </div>
                     </div>
                 </div>
