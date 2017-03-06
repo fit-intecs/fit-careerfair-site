@@ -33,7 +33,7 @@
                             <div class="row-content">
                                 <h4 style="font-weight: 500;" class="list-group-item-heading">{{$student->firstName}} {{$student->lastName}}</h4>
 
-                                <p class="list-group-item-text">{{$student->objective}}
+                                <p class="list-group-item-text text-justify">{{$student->objective}}
 
                                 </p>
                                 @foreach(explode(",", $student->techs) as $tech)

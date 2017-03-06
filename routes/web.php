@@ -16,6 +16,7 @@ $this->get('/', function () {
 })->name('root');
 
 $this->get('/students','StudentController@index')->name('students');
+$this->get('/profileimage/{filename}', 'UserController@getUserImage')->name('profile.image');
 $this->get('/students/{id}',function($id){
     $user = \App\User::where('name', $id)->first();
     $profile = $user->profile;
@@ -58,7 +59,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     $this->get('addprofiledetails', 'UserController@getAddUserProfileDetails')->name('addProfileDetails');
     $this->post('profiledetails', 'UserController@postAddUserProfileDetails')->name('postProfileDetails');
-    $this->get('/profileimage/{filename}', 'UserController@getUserImage')->name('profile.image');
     $this->post('edit', 'UserController@postEditProfile')->name('profile.edit');
 
 
