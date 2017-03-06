@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
+$this->get('/', function () {
     return view('welcome');
-});
+})->name('root');
+
+$this->get('/students','StudentController@index')->name('students');
 
 
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -54,3 +56,15 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 });
+
+$this->get('/test', function () { // for testing purpose
+    $faker = Faker\Factory::create();
+    for ($i=0; $i < 1000; $i++) {
+        try {
+        $values[]= str_replace([" ","."], [",",""], $faker->sentence);
+        } catch (\OverflowException $e) {
+        echo "There are only 9 unique digits not null, Faker can't generate 10 of them!";
+         }
+    }
+    dd($values);
+})->name('test');

@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container ">
+<div class="container">
     <div class="row">
-        <div class="well well-lg col-lg-6 col-lg-offset-3">
+        <div class="well well-lg col-lg-6 ">
             <form class="form-horizontal" role="form" method="post" action="{{ route('login') }}">
                 <fieldset>
                     {{ csrf_field() }}
-                    <legend><i class="fa fa-2x fa-graduation-cap"></i>Students</legend>
+                    <legend><i class="fa fa-2x fa-graduation-cap"></i>Students Sign in</legend>
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="inputEmail" class="col-md-2 control-label">Index No</label>
 
@@ -48,8 +48,13 @@
                             <button type="submit" class="btn btn-raised btn-primary">Login</button>
                         </div>
                     </div>
-
-                    <hr>
+                </fieldset>
+            </form>
+        </div>
+        <div class="well well-lg col-lg-5 col-lg-offset-1">
+            <form class="form-horizontal" role="form" method="post" action="{{ route('login') }}">
+                <fieldset>
+                    <legend><i class="fa fa-2x fa-graduation-cap"></i>Students Sign up</legend>
                     <div class="form-group">
                         <div class="col-lg-12 text-justify">
                             <strong>Attention plz !</strong>
