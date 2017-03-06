@@ -13,10 +13,10 @@ class StudentController extends Controller
         $profiles = Profile::paginate(10);
 
         //TODO: remove after real images are uploaded
-        $faker = Factory::create();
+        //$faker = Factory::create();
         for($i=0;$i<count($profiles);$i++){
             $profiles[$i]->objective = str_limit($profiles[$i]->objective, $limit = 180, $end = '...');
-            $profiles[$i]->img = $faker->imageUrl(50, 50);
+            $profiles[$i]->img = "/img/student.jpg"; //$faker->imageUrl(50, 50);
         }
 
         $page_data = array(
