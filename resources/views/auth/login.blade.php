@@ -2,17 +2,17 @@
 
 @section('content')
 <div class="container" style="margin-top: 72px">
-    <div class="row">
-        <div class="well well-lg col-lg-6 ">
+    <div class="row login">
+        <div class="well well-lg col-lg-5 col-lg-offset-1">
             <form class="form-horizontal" role="form" method="post" action="{{ route('login') }}">
                 <fieldset>
                     {{ csrf_field() }}
                     <legend><i class="fa fa-2x fa-graduation-cap"></i>Students Sign in</legend>
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        <label for="inputEmail" class="col-md-2 control-label">Index No</label>
+                        <label for="inputEmail" class="col-md-4 control-label">Index No</label>
 
-                        <div class="col-md-10">
-                            <input id="name" type="text" placeholder="ex: 124000h" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                        <div class="col-md-8">
+                            <input id="name" type="text" autocomplete="off" placeholder="ex: 124000h" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
                             @if ($errors->has('name'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -21,9 +21,9 @@
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <label for="inputPassword" class="col-md-2 control-label">Password</label>
+                        <label for="inputPassword" class="col-md-4 control-label">Password</label>
 
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <input id="password" type="password" class="form-control" placeholder="Password" name="password" required>
                             @if ($errors->has('password'))
                                 <span class="help-block">
@@ -51,7 +51,7 @@
                 </fieldset>
             </form>
         </div>
-        <div class="well well-lg col-lg-5 col-lg-offset-1">
+        <div class="well well-lg col-lg-4 col-lg-offset-1">
             <form class="form-horizontal" role="form" method="post" action="{{ route('login') }}">
                 <fieldset>
                     <legend><i class="fa fa-2x fa-graduation-cap"></i>Students Sign up</legend>
