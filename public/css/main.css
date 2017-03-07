@@ -72,13 +72,15 @@
 }
 
 .pattern-bg{
-    background: url("../img/bg-pattern.png"), #6b395c;
+    background: url("../img/bg-pattern.png"), #fff;
     /* fallback for old browsers */
-    background: url("../img/bg-pattern.png"), -webkit-linear-gradient(to left, #6b395c, #9a8e8f);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: url("../img/bg-pattern.png"), linear-gradient(to left, #6b395c, #9a8e8f);
+    /*background: url("../img/bg-pattern.png"), -webkit-linear-gradient(to left, #6b395c, #9a8e8f);*/
+    /*!* Chrome 10-25, Safari 5.1-6 *!*/
+    /*background: url("../img/bg-pattern.png"), linear-gradient(to left,#c5aeb0,#fff, #fff, #c5aeb0);*/
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+
 
 /*.bgimg {*/
     /*background-image: url('../images/FotorCreated.jpg');*/
