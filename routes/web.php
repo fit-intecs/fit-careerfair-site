@@ -15,6 +15,10 @@ $this->get('/', function () {
     return view('welcome');
 })->name('root');
 
+$this->get('/mat', function () {
+    return view('index');
+})->name('mat');
+
 $this->get('/students','StudentController@index')->name('students');
 $this->get('/profileimage/{filename}', 'UserController@getUserImage')->name('profile.image');
 $this->get('/students/{id}',function($id){

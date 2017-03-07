@@ -183,7 +183,6 @@ body .container-fluid .jumbotron-danger {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0;
-  will-change: box-shadow, transform;
   -webkit-transition: -webkit-box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
        -o-transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
           transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2404,10 +2403,15 @@ fieldset[disabled] .navbar .btn-link:focus {
 }
 .navbar,
 .navbar.navbar-default {
-  background-color: #009688;
+  background-color: #333;
   color: rgba(255,255,255, 0.84);
     box-shadow: 0 3px 3px rgba(6, 6, 6, 0.35);
 }
+
+.navbar{
+  top: 81px;
+}
+
 .navbar .navbar-form .form-group input.form-control::-moz-placeholder,
 .navbar.navbar-default .navbar-form .form-group input.form-control::-moz-placeholder,
 .navbar .navbar-form input.form-control::-moz-placeholder,

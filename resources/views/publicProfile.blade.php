@@ -9,9 +9,9 @@
                         <h3><div id="firstName">{{ $profileDetails->firstName }}</div> <div id="lastName"> {{$profileDetails->lastName}}</div></h3>
                         </div>
                         @if (\Illuminate\Support\Facades\Storage::disk('local')->has($profileDetails->index  . '.jpg'))
-                                <img src="{{ route('profile.image', ['filename' => $profileDetails->index . '.jpg']) }}" alt="" class="img-responsive">
+                                <img src="{{ route('profile.image', ['filename' => $profileDetails->index . '.jpg']) }}" alt="" class="img-responsive profile_img">
                         @else
-                                <img src="/img/default-user.png" class="img-responsive">
+                                <img src="/img/default-user.png" class="img-responsive profile_img">
                         @endif
                     </div>
 

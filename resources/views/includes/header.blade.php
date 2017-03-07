@@ -7,16 +7,57 @@ use \Illuminate\Routing;
     FIT Careers
 </h1>
 </div>
-<div class="navbar navbar-default" style="background-color: #333333">
+{{--<div class="navbar navbar-default" style="background-color: #333333">--}}
+    {{--<div class="container">--}}
+        {{--<div class="navbar-header">--}}
+            {{--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">--}}
+                {{--<span class="icon-bar"></span>--}}
+                {{--<span class="icon-bar"></span>--}}
+                {{--<span class="icon-bar"></span>--}}
+            {{--</button>--}}
+        {{--</div>--}}
+        {{--<div class="navbar-collapse collapse navbar-responsive-collapse">--}}
+            {{--<ul class="nav navbar-nav">--}}
+                {{--<li class="{{ Route::is('root') ? 'active' : '' }}"><a href="/">Home</a></li>--}}
+                {{--<li class="{{ Route::is('companies') ? 'active' : '' }}"><a href="#">Companies</a></li>--}}
+                {{--<li class="{{ Route::is('students') ? 'active' : '' }}"><a href="/students">Students</a></li>--}}
+            {{--</ul>--}}
+            {{--<form class="navbar-form navbar-left">--}}
+                {{--<div class="row">--}}
+                    {{--<div class="col-lg-12">--}}
+                        {{--<i class="fa fa-search"></i>--}}
+                        {{--<input type="text" class="form-control col-sm-8" placeholder="Search">--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</form>--}}
+            {{--<ul class="nav navbar-nav navbar-right">--}}
+                {{--@if (Route::has('login'))--}}
+
+                    {{--@if (Auth::check())--}}
+                        {{--<li class="{{ Route::is('home') ? 'active' : '' }}"><a href="{{ url('/home') }}"><i class="fa fa-graduation-cap"></i> Dashboard</a></li>--}}
+                    {{--@else--}}
+                        {{--<li class="{{ Route::is('login') ? 'active' : '' }}"><a href="{{ url('/login') }}"><i class="fa fa-graduation-cap"></i> Login</a></li>--}}
+                    {{--@endif--}}
+
+                {{--@endif--}}
+
+            {{--</ul>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</div>--}}
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
+            {{--<a class="navbar-brand page-scroll" href="#page-top">Start Bootstrap</a>--}}
         </div>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="{{ Route::is('root') ? 'active' : '' }}"><a href="/">Home</a></li>
                 <li class="{{ Route::is('companies') ? 'active' : '' }}"><a href="#">Companies</a></li>
@@ -31,6 +72,15 @@ use \Illuminate\Routing;
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
+                <li {{ !Route::is('root') ? "style=display:none": ""}}>
+                    <a class="page-scroll" href="#download">Download</a>
+                </li>
+                <li {{ !Route::is('root') ? "style=display:none": ""}}>
+                    <a class="page-scroll" href="#features">Features</a>
+                </li>
+                <li {{ !Route::is('root') ? "style=display:none": ""}}>
+                    <a class="page-scroll" href="#contact">Contact</a>
+                </li>
                 @if (Route::has('login'))
 
                     @if (Auth::check())
@@ -40,9 +90,10 @@ use \Illuminate\Routing;
                     @endif
 
                 @endif
-
             </ul>
         </div>
+        <!-- /.navbar-collapse -->
     </div>
-</div>
+    <!-- /.container-fluid -->
+</nav>
 

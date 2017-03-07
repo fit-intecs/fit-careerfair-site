@@ -1,5 +1,6 @@
 <html>
 <head>
+    @section('head')
     <title>@yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Fonts -->
@@ -12,27 +13,34 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/dist/css/bootstrap-material-design.css"/>
-    <link rel="stylesheet" type="text/css" href="/dist/css/ripples.css"/>
+    <link rel="stylesheet" type="text/css" href="/dist/css/ripples.min.css"/>
     <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+        <link href="css/new-age.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ URL::to('/css/main.css') }}">
+    @show
 </head>
-<body>
+<body class="pattern-bg">
 <div>
 
     @section('header')
         @include('includes.header')
     @show
 
-    <div class="container">
-        @yield('content')
-    </div>
+
+    @yield('content')
+
 
 </div>
 @section('scripts')
-<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="/dist/js/ripples.js"></script>
-<script src="/dist/js/material.js"></script>
+<script src="/dist/js/ripples.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="/dist/js/material.min.js"></script>
+<script src="js/new-age.min.js"></script>
 <script>
     $.material.init();
 </script>

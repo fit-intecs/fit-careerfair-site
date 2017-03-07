@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 72px">
     <div class="row">
         <div class="well well-lg col-lg-6 ">
             <form class="form-horizontal" role="form" method="post" action="{{ route('login') }}">
@@ -62,8 +62,13 @@
                             use the twitter account which you get batch tweets
                         </div>
                         <div class="col-lg-6 col-lg-offset-3">
-                            <a href="redirect/twitter" style="background-color: #1da1f2" class="btn btn-raised btn-lg"><i class="fa fa-2x fa-twitter"></i> Sign up With Twitter</a>
+                            <a href="redirect/twitter" style="width: 100%; background-color: #1da1f2" class="btn btn-raised btn-lg"><i class="fa fa-twitter"></i> Sign up</a>
                         </div>
+                        @if (session('status'))
+                            <div class="col-lg-12">
+                                <p class="text-warning text-center"><b>{{ session('status') }}</b></p>
+                            </div>
+                        @endif
                     </div>
                 </fieldset>
             </form>
@@ -72,4 +77,8 @@
 
 
 </div>
+@endsection
+@section('scripts')
+    @parent
+
 @endsection

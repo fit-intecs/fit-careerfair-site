@@ -18,10 +18,10 @@
                                         </div>
                                         @if (\Illuminate\Support\Facades\Storage::disk('local')->has(\Illuminate\Support\Str::upper(Auth::user()->name)  . '.jpg'))
 
-                                                <img src="{{ route('profile.image', ['filename' => \Illuminate\Support\Str::upper(Auth::user()->name) . '.jpg']) }}" alt="" class="img-responsive">
+                                                <img src="{{ route('profile.image', ['filename' => \Illuminate\Support\Str::upper(Auth::user()->name) . '.jpg']) }}" alt="" class="img-responsive profile_img">
 
                                         @else
-                                                <img src="/img/default-user.png" class="img-responsive">
+                                                <img src="/img/default-user.png" class="img-responsive profile_img">
                                         @endif
 
                                     </div>

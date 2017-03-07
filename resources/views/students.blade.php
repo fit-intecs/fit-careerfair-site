@@ -19,7 +19,7 @@
         </div>
     </div>
 
-<div class="container">
+<div class="container" style="padding-top: 72px">
     <div class="panel panel-default">
         <div id="student" class="panel-body">
             <div style="text-align: right; padding-right: 20px">{{ $students->links() }}</div>
@@ -39,7 +39,7 @@
                                 @foreach(explode(",", $student->techs) as $tech)
                                     <span style="margin-bottom: 10px" class="label label-default">{{$tech}}</span>
                                 @endforeach
-                                <button type="button" style="color: #00b0ff; float: right" onclick="viewProfile('{{$student->index}}');" class="btn btn-raised btn-xs">read more</button>
+                                <a style="color: #00b0ff; float: right" onclick="viewProfile('{{$student->index}}');" class="btn btn-raised btn-xs">read more</a>
                             </div>
                         </div>
                         <div class="list-group-separator"></div>
@@ -72,30 +72,5 @@
                 }
             });
         }
-///students/
-
-//        $('#student').jscroll({
-//            loadingHtml: '<img src="/img/ajaxloading.gif" alt="Loading" /> Loading...',
-//            padding: 20,
-//            nextSelector: '#student>.pagination>li:last',
-//            contentSelector: '#student-list div.item',
-//            debug:true
-//        });
-
-//        (function(){
-//
-//            var loading_options = {
-//                finishedMsg: "<div class='end-msg'>Congratulations! You've reached the end of the internet</div>",
-//                msgText: "<div class='center'>Loading...</div>",
-//                img: "../img/ajaxloading.gif"
-//            };
-//
-//            $('#student-list').infinitescroll({
-//                loading : loading_options,
-//                navSelector : "#student .pagination",
-//                nextSelector : "#student .pagination li.active + li a",
-//                itemSelector : "#items div.item"
-//            });
-//        })();
     </script>
 @endsection

@@ -65,7 +65,8 @@ class SocialAuthController extends Controller
 
             return redirect()->to('/home');
         }else{
-            return redirect()->to('/login');
+
+            return redirect()->to('/login')->with('status', 'This twitter account is not applicable to Sign up');;
         }
 
     }

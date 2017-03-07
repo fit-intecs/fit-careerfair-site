@@ -46,7 +46,7 @@
     color: green;
 }
 
-img {
+.profile_img {
     display: block;
     max-width:170px;
     max-height:200px;
@@ -55,9 +55,19 @@ img {
 }
 
 .loading-img{
+    display: block;
     width: 50px;
     height: 50px;
     margin: auto;
+}
+
+.pattern-bg{
+    background: url("../img/bg-pattern.png"), #6b395c;
+    /* fallback for old browsers */
+    background: url("../img/bg-pattern.png"), -webkit-linear-gradient(to left, #6b395c, #9a8e8f);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: url("../img/bg-pattern.png"), linear-gradient(to left, #6b395c, #9a8e8f);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 /*.bgimg {*/
