@@ -13,8 +13,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    @yield('header')
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
