@@ -19,7 +19,11 @@
                         <div class="header-content-inner">
                             <h1>New Age is an app landing page that will help you beautifully showcase your new mobile app, or anything else!</h1>
                             <a href="#download" class="btn btn-outline btn-xl page-scroll">Start Now for Free!</a>
+                            <p id="power">
+                                1
+                            </p>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-sm-5">
@@ -170,4 +174,12 @@
 
 @section('scripts')
     @parent
+    <script>
+
+        window.Echo.channel('CFSite').listen('.profile_feed', function (data) {
+            console.log(data.data.power);
+            $('#power').html(data.data.power);
+        });
+
+    </script>
 @endsection

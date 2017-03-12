@@ -41,3 +41,11 @@ $factory->define(App\Profile::class, function (Faker\Generator $faker) {
 
     ];
 });
+
+$factory->define(App\Company::class, function (Faker\Generator $faker){
+    return [
+        'name' => $faker->firstName,
+        'website' => $faker->url(),
+        'description' => $faker->paragraph(),
+    ];
+});

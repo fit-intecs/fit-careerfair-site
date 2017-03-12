@@ -15,7 +15,7 @@ use App\User;
 
 class SocialAccountService
 {
-    public function createOrGetUser(Provider $provider, \Laravel\Socialite\One\User $authuser)
+    public function createOrGetUser(Provider $provider, \Laravel\Socialite\One\User $authuser,$isAdmin)
     {
 
         $providerUser = $authuser;
@@ -38,17 +38,28 @@ class SocialAccountService
 
             if (!$user) {
 
-                $user = User::create([
-                    'email' => $providerUser->getId(),
-                    'password' => bcrypt(str_random()),
-                    'name' => $providerUser->getName(),
-                    'status' => 'first_time',
-                ]);
+                if($isAdmin){
+                    $user = new User();
+                    $user->email = $providerUser->getId();
+                    $user->password = bcrypt(str_random());
+                    $user->name = $providerUser->getName();
+                    $user->status = 'first_time';
+                    $user->role = 'admin';
+                    $user->save();
+                }else{
+                    $user = new User();
+                    $user->email = $providerUser->getId();
+                    $user->password = bcrypt(str_random());
+                    $user->name = $providerUser->getName();
+                    $user->status = 'first_time';
+                    $user->role = 'student';
+                    $user->save();
+                }
+
             }
 
             $account->user()->associate($user);
             $account->save();
-
             return $user;
 
         }

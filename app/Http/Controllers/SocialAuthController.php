@@ -49,18 +49,34 @@ class SocialAuthController extends Controller
         $whiteListedAccounts = json_decode($response->getBody());
 
         $connections = [];
+        $ids = [];
         foreach($whiteListedAccounts as $whiteListedAccount){
             $connections = array_merge($connections,$whiteListedAccount->connections);
+            $ids[] = $whiteListedAccount->id;
         }
 
         $isFollowing = false;
+        $isAdmin = false;
 
-        foreach($connections as $connection){
-            $isFollowing = ($connection == 'following')? true: false;
+        $account_array = explode(",",$twitterWhiteList);
+
+
+        foreach($ids as $id){
+            if($id == $tmpUser->id){
+                $isAdmin = true;
+                break;
+            }
         }
 
-        if ($isFollowing){  //Check user following any white listed twitter account
-            $user = $service->createOrGetUser($prov,$tmpUser);
+        foreach($connections as $connection){
+            if($connection == 'following'){
+                $isFollowing = true;
+                break;
+            }
+        }
+
+        if ($isFollowing || $isAdmin){  //Check user following any white listed twitter account
+            $user = $service->createOrGetUser($prov,$tmpUser,$isAdmin);
             auth()->login($user);
 
             return redirect()->to('/home');
