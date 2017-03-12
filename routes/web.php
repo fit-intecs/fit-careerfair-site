@@ -22,12 +22,7 @@ $this->get('/mat', function () {
 $this->get('/students','StudentController@index')->name('students');
 $this->get('/companies','CompanyController@index')->name('companies');
 $this->get('/profileimage/{filename}', 'UserController@getUserImage')->name('profile.image');
-$this->get('/students/{id}',function($id){
-    $user = \App\User::where('name', $id)->first();
-    $profile = $user->profile;
-    $profile->index = $user->name;
-    return view('publicProfile',["profileDetails"=>$profile]);
-})->name('students_view');
+$this->get('/students/{id}','StudentController@viewStudent')->name('students_view');
 
 
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');

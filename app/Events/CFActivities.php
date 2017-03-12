@@ -9,11 +9,12 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Spatie\Activitylog\Models\Activity;
 
 class CFActivities implements ShouldBroadcast
 {
 
-    public $data;
+    public $activity;
     /**
      * Create a new event instance.
      *
@@ -21,8 +22,13 @@ class CFActivities implements ShouldBroadcast
      */
     public function __construct()
     {
-        $this->data = array(
-            'power'=> '10'
+        $last_activity = Activity::inLog('profile_view')->get()->last();
+        $profile = $last_activity->causer;
+        $img = $profile->user->name . '.jpg';
+        $this->activity = array(
+            "time" => $last_activity->created_at->toW3cString(),
+            "name" => $profile->firstName. ' ' . $profile->lastName,
+            "img" => $img
         );
     }
 
@@ -38,6 +44,6 @@ class CFActivities implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'profile_feed';
+        return 'profile_views';
     }
 }

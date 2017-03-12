@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CFActivities;
 use App\Profile;
+use App\User;
 use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,5 +26,18 @@ class StudentController extends Controller
             'students' => $profiles
         );
         return view('students', $page_data);
+    }
+
+    public function viewStudent($id, Request $request){
+        $user = User::where('name', $id)->first();
+        $profile = $user->profile;
+        $profile->index = $user->name;
+
+        activity('profile_view')
+            ->causedBy($profile)
+            ->log($request->ip());
+        event(new CFActivities());
+
+        return view('publicProfile',["profileDetails"=>$profile]);
     }
 }

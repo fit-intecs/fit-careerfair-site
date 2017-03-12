@@ -30,9 +30,25 @@
                     <div class="device-container">
                         <div class="device-mockup iphone6_plus portrait white">
                             <div class="device">
-                                <div class="screen">
+                                <div class="screen" style="background-color: #d0a4c0; overflow-y: scroll">
+                                    <div id="views-list" class="list-group">
+                                        <div>
+                                            <div class="list-group-item">
+                                                <div class="row-picture">
+                                                    <img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
+                                                </div>
+                                                <div class="row-content">
+                                                    <h4 class="list-group-item-heading">Tile with avatar</h4>
+
+                                                    <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus</p>
+                                                </div>
+                                            </div>
+                                            <div class="list-group-separator"></div>
+                                        </div>
+
+                                    </div>
                                     <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                                    <img src="img/demo-screen-1.jpg" class="img-responsive" alt="">
+                                    {{--<img src="img/demo-screen-1.jpg" class="img-responsive" alt="">--}}
                                 </div>
                                 <div class="button">
                                     <!-- You can hook the "home button" to some JavaScript events or just remove it -->
@@ -176,10 +192,81 @@
     @parent
     <script>
 
-        window.Echo.channel('CFSite').listen('.profile_feed', function (data) {
-            console.log(data.data.power);
-            $('#power').html(data.data.power);
+        function timeSince(date) {
+
+            var seconds = Math.floor((new Date() - date) / 1000);
+
+            var interval = Math.floor(seconds / 31536000);
+
+            if (interval > 1) {
+                return interval + " years";
+            }
+            interval = Math.floor(seconds / 2592000);
+            if (interval > 1) {
+                return interval + " months";
+            }
+            interval = Math.floor(seconds / 86400);
+            if (interval > 1) {
+                return interval + " days";
+            }
+            interval = Math.floor(seconds / 3600);
+            if (interval > 1) {
+                return interval + " hours";
+            }
+            interval = Math.floor(seconds / 60);
+            if (interval > 1) {
+                return interval + " minutes";
+            }
+            return Math.floor(seconds) + " seconds";
+        }
+
+        function View(time,name,img) {
+            this.time = time;
+            this.name = name;
+            this.img = img;
+        }
+
+        var views = [];
+
+        window.Echo.channel('CFSite').listen('.profile_views', function (data) {
+            console.log(data.activity);
+            views.push(new View(data.activity.time,data.activity.name,data.activity.img));
+
+            console.log(views);
+
+            var ago = timeSince(new Date(data.activity.time));
+            var html = $("<div>")
+                        .append($("<div class='list-group-item'>")
+                            .append($("<div class='row-picture'>")
+                                .append("<img class='circle' src='http://lorempixel.com/56/56/people/' alt='icon'>")
+                                    )
+                            .append($("<div class='row-content'>")
+                            .append($("<h4 class='list-group-item-heading'></h4>").text(data.activity.name))
+                            .append($("<p class='list-group-item-text'></p>").text('Profile has benn viewed '))
+                            .append($("<p class='text-sm-left'></p>").text(ago + ' ago'))
+                            )
+            ).append("<div class='list-group-separator'>");
+
+
+
+
+
+
+
+//            $('<div/>', {
+//                id: 'foo',
+//                href: 'http://google.com',
+//                title: data.activity.name,
+//                rel: 'external',
+//                text: 'Go to Google!'
+//            }).appendTo('#views-list');
+
+
+
+            $('#views-list').prepend(html.hide().fadeIn(1000));
         });
+
+
 
     </script>
 @endsection
