@@ -51,6 +51,8 @@ $this::group(['middleware' => ['auth']], function () {
     $this::group(['prefix' => 'adm','middleware' => ['isAdmin']], function () {
         $this->get('/','AdminController@index')->name('admin.dashboard');
         $this->get('/companies','AdminController@companiesPage')->name('admin.companiesPage');
+        $this->get('/deleteCom/{id}','AdminController@deleteCompany')->name('admin.deleteCompany');
+        $this->post('/companies','AdminController@addCompany')->name('admin.addNewCompany');
         $this->get('/ex_profiles','AdminController@exportProfileData')->name('admin.exportProfiles');
     });
 

@@ -246,23 +246,7 @@
                             .append($("<p class='text-sm-left'></p>").text(ago + ' ago'))
                             )
             ).append("<div class='list-group-separator'>");
-
-
-
-
-
-
-
-//            $('<div/>', {
-//                id: 'foo',
-//                href: 'http://google.com',
-//                title: data.activity.name,
-//                rel: 'external',
-//                text: 'Go to Google!'
-//            }).appendTo('#views-list');
-
-
-
+            
             $('#views-list').prepend(html.hide().fadeIn(1000));
         });
 

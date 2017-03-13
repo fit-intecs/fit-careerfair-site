@@ -35,8 +35,18 @@ class AdminController extends Controller
     }
 
     public function companiesPage(){
-        $data = Company::paginate(5);
+        $data = Company::orderBy('created_at','desc')->paginate(5);
         return view('admin.companiesPage',['companies' => $data]);
+    }
+
+    public function addCompany(Request $request){
+        $company = Company::create($request->all());
+        return redirect(route('admin.companiesPage'));
+    }
+
+    public function deleteCompany($id){
+        $com = Company::find($id)->delete();
+        return redirect()->back();
     }
 
 }

@@ -41,8 +41,8 @@
     			</div>
     			<div class="modal-body">
     				
-                    <form action="#" method="post" role="form">
-
+                    <form action="{{route('admin.addNewCompany')}}" method="post" role="form">
+                        {{ csrf_field() }}
                     	<div class="form-group">
                     		<label for="">Company name</label>
                     		<input type="text" class="form-control" name="name" id="" placeholder="Google Inc.">
@@ -59,10 +59,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for=""></label>
-                            <textarea class="form-control" name="description" style="width: 100%">
-
-                            </textarea>
+                            <label for="">Description</label>
+                            <textarea class="form-control" name="description" placeholder="Description" style="width: 100%"></textarea>
                         </div>
 
                         <input type="submit" style="display:none" />
@@ -88,7 +86,8 @@
                 			<th>name</th>
                 			<th>logo</th>
                 			<th>description</th>
-                			<th style="text-align: right">#</th>
+                			<th style="
+                			text-align: right">#</th>
                 		</tr>
                 	</thead>
                 	<tbody>
@@ -103,12 +102,10 @@
                                 </div>
                             </td>
                 			<td width="60%">
-                                <textarea class="form-control" disabled style="width: 100%">
-                                    {{$company->description}}
-                                </textarea>
+                                <textarea class="form-control" readonly style="width: 100%">{{$company->description}}</textarea>
                             </td>
                             <td style="text-align: right; vertical-align: middle">
-                                <a href="#" type="button" class="btn btn-danger btn-xs">Delete</a>
+                                <a href="{{route('admin.deleteCompany',[$company->id])}}" onclick="return confirm('Do want to delete \'{{$company->name}}\' ?')" type="button" class="btn btn-danger btn-xs">Delete</a>
                             </td>
                 		</tr>
                     @endforeach
