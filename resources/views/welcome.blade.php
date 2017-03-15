@@ -273,14 +273,15 @@
         }
 
 
-
         timerefresh();
 
 
         var id = {{count($data)}}+1;
 
-        window.Echo.channel('CFSite').listen('.profile_views', function (data) {
 
+        var id = {{count($data)}}+1;
+
+        window.Echo.channel('CFSite').listen('.profile_views', function (data) {
 
             var ago = timeSince(new Date(data.activity.time)); //2017-03-12T17:51:22+00:00
 
@@ -305,7 +306,6 @@
                 newtime = timeSince(new Date($(this).text()));
                 agoElement = $(this).prev().prev();
                 oldtime = agoElement.text();
-
                 if(newtime !== oldtime){
                     agoElement.fadeTo( 500, 0 );
                     agoElement.text(newtime).fadeTo( 0, 0).fadeTo( 1000, 1 );
