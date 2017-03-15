@@ -11,9 +11,7 @@
 |
 */
 
-$this->get('/', function () {
-    return view('welcome');
-})->name('root');
+$this->get('/', 'indexController@index')->name('root');
 
 $this->get('/mat', function () {
     return view('index');
@@ -22,7 +20,7 @@ $this->get('/mat', function () {
 $this->get('/students','StudentController@index')->name('students');
 $this->get('/companies','CompanyController@index')->name('companies');
 $this->get('/profileimage/{filename}', 'UserController@getUserImage')->name('profile.image');
-$this->get('/students/{id}','StudentController@viewStudent')->name('students_view');
+$this->get('/students/{id}/{count?}','StudentController@viewStudent')->name('students_view');
 
 
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');

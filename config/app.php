@@ -2,6 +2,8 @@
 
 return [
 
+    'broadcasting_block_time' => env('BLOCK_TIME', 1200), // seconds
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
