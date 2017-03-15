@@ -57,6 +57,7 @@ class UserController extends Controller{
         $profile->achievement_id = 1;
         $profile->final_project = 1;
 
+        $profile->user()->associate(Auth::user());
         $profile->save();
 
         return redirect()->route('home',['profileDetails'=> $profile]);

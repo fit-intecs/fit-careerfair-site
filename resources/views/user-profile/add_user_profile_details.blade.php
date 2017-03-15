@@ -10,8 +10,6 @@
 @endsection
 
 @section('content')
-    @include('includes.message-box')
-
     <div class="row">
         <div class="col-md-9 col-md-offset-2">
             <div class="panel panel-primary">
@@ -20,44 +18,79 @@
                 </div>
                 <div class="panel-body">
                 <form method="post" action="{{ route('postProfileDetails') }}">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="Enter First Name" name="firstName">
-                    <small id="emailHelp" class="form-text text-muted">Your first name will be shared publicly.</small>
-                </div>
-                    <div class="form-group">
+
+                    <div class="form-group{{ $errors->has('firstName') ? ' has-error' : '' }}">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="Enter First Name" value="{{ old('firstName') }}" name="firstName">
+                        @if ($errors->has('firstName'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('firstName') }}</strong>
+                            </span>
+                        @endif
+                        <small id="emailHelp" class="form-text text-muted">Your first name will be shared publicly.</small>
+                    </div>
+                    <div class="form-group{{ $errors->has('lastName') ? ' has-error' : '' }}">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Enter email" name="lastName">
+                        <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Enter email" value="{{ old('lastName') }}" name="lastName">
+                        @if ($errors->has('lastName'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('lastName') }}</strong>
+                            </span>
+                        @endif
                         <small id="emailHelp" class="form-text text-muted">Your last name will be shared publicly</small>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                         <label for="phoneNo">Phone NO.</label>
-                        <input type="text" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter Phone Number" name="phone">
+                        <input type="text" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter Phone Number" value="{{ old('phone') }}" name="phone">
+                        @if ($errors->has('phone'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('phone') }}</strong>
+                            </span>
+                        @endif
                         <small id="emailHelp" class="form-text text-muted">phone number will be shared publicly</small>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group{{ $errors->has('linkedin') ? ' has-error' : '' }}">
                         <label for="linkedinLink">LinkedIn</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Link" name="linkedin">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Link" value="{{ old('linkedin') }}" name="linkedin">
+                        @if ($errors->has('linkedin'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('linkedin') }}</strong>
+                            </span>
+                        @endif
                         <small id="emailHelp" class="form-text text-muted">Link will be shared publicly</small>
                     </div>
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('degree') ? ' has-error' : '' }}">
                     <label for="exampleSelect1">Degree</label>
-                    <select class="form-control" id="exampleSelect1" name="degree">
+                    <select class="form-control" id="exampleSelect1" value="{{ old('degree') }}" name="degree">
                         <option value="IT">BSc(Hons) IT</option>
                         <option value="ITM">BSc(Hons) ITM</option>
                     </select>
+                    @if ($errors->has('degree'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('degree') }}</strong>
+                        </span>
+                    @endif
                 </div>
-                <div class="form-group">
+                <div class="form-group{{ $errors->has('objective') ? ' has-error' : '' }}">
                     <label for="objective">Profile/Objective</label>
-                    <textarea class="form-control" id="objective" rows="3" name="objective"></textarea>
+                    <textarea class="form-control" id="objective" rows="3" value="{{ old('objective') }}" name="objective"></textarea>
+                    @if ($errors->has('objective'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('objective') }}</strong>
+                        </span>
+                    @endif
                 </div>
-                    <div class="form-group">
+                    <div class="form-group{{ $errors->has('techskills') ? ' has-error' : '' }}">
                         <label for="techskills">Technical Skills</label>
                         {{--<textarea class="form-control" id="techskills" rows="3" name="techskills"></textarea>--}}
-                        <input type="text" class="form-control" id="tokenfield" name="techskills" value="Java,C#.NET, Python" />
-
+                        <input type="text" class="form-control" id="tokenfield" name="techskills" value="{{ old('techskills','Java,C#.NET, Python') }}"/>
+                        @if ($errors->has('techskills'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('techskills') }}</strong>
+                            </span>
+                        @endif
                     </div>
 
                     <div class="form-group" >
@@ -127,7 +160,7 @@
             count = $('.exp-section ul').children().length+1;
 
             $('.exp-section .exp-list').append('<li><div class="control-group" id="control-group' + count + '"><label class="control-label" for="experience' + count + '">Experience' + count +
-            '</label><div class="controls' + count + '"><textarea class="form-control" id="objective" rows="3" name="objective"></textarea></div></div></li>');
+            '</label><div class="controls' + count + '"><textarea class="form-control" id="experience" rows="3" name="experience"></textarea></div></div></li>');
 
         });
 
@@ -142,7 +175,7 @@
             count = $('.ach-section ul').children().length+1;
 
             $('.ach-section .ach-list').append('<li><div class="control-group" id="control-group' + count + '"><label class="control-label" for="achievements' + count + '">Achievement' + count +
-            '</label><div class="controls' + count + '"><textarea class="form-control" id="objective" rows="3" name="objective"></textarea></div></div></li>');
+            '</label><div class="controls' + count + '"><textarea class="form-control" id="achievements" rows="3" name="achievements"></textarea></div></div></li>');
 
         });
 
