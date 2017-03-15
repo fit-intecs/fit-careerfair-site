@@ -80,7 +80,7 @@
                             <div id="views-list" class="scroller">
                                 @foreach($data as $key=>$prof_view)
                                 <div class='well well-sm' style='width: 100%; min-height: 40px; z-index: {{count($data)-$key}}'>
-                                    <img width='30px' height='30px' src='http://lorempixel.com/30/30/?{{$key}}'>
+                                    <img width='30px' height='30px' src='/logo/{{rand(0,29)}}.jpg'>
                                     <a target='_blank' href="{{route('students_view',['id'=>$prof_view->causer->user->name,'count'=>'false'])}}">{{$prof_view->causer->firstName}}'s</a> profile has been viewed
                                     <br><span class="time-ago"></span>
                                     <div style='clear:both'></div>
@@ -266,28 +266,26 @@
             return "just now";
         }
 
-        function View(time,name,img) {
-            this.time = time;
-            this.name = name;
-            this.img = img;
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
         }
+
+
 
         timerefresh();
 
-        var views = [];
 
         var id = {{count($data)}}+1;
 
         window.Echo.channel('CFSite').listen('.profile_views', function (data) {
-            console.log(data.activity);
-            views.push(new View(data.activity.time,data.activity.name,data.activity.img));
 
-            console.log(views);
 
             var ago = timeSince(new Date(data.activity.time)); //2017-03-12T17:51:22+00:00
 
             var view = $("<div class='well well-sm' style='width: 100%; min-height: 60px'>").css("z-index", id)
-                    .append("<img width='30px' height='30px' src='http://lorempixel.com/30/30/?{{$key}}'>")
+                    .append($("<img width='30px' height='30px'>").attr('src','/logo/' + getRandomInt(0,29) + '.jpg'))
                     .append($("<a target='_blank'></a>").attr('href','/students/'+ data.activity.index+ '/false').text(data.activity.name + '\'s')).append(' profile has been viewed')
                     .append($("<br><span class='time-ago'></span>").text(ago))
                     .append("<div style='clear:both'></div>")
