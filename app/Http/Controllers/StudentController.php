@@ -46,6 +46,7 @@ class StudentController extends Controller
                 ->log($request->ip());
 
             event(new CFActivities());
+            dd($lastFromThisIP);
         }
 
         return view('publicProfile',["profileDetails"=>$profile]);
