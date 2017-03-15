@@ -29,7 +29,7 @@ class CFActivities implements ShouldBroadcast
             "time" => $last_activity->created_at->toW3cString(),
             "name" => $profile->firstName,
             "img" => $img,
-            "index" => $profile->name
+            "index" => $profile->user->name
         );
     }
 
