@@ -31,7 +31,7 @@ class StudentController extends Controller
         return view('students', $page_data);
     }
 
-    public function viewStudent($id,$count=true, Request $request){
+    public function viewStudent($id,$count='true', Request $request){
         $user = User::where('name', $id)->first();
         $profile = $user->profile;
         $profile->index = $user->name;
