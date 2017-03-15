@@ -27,8 +27,9 @@ class CFActivities implements ShouldBroadcast
         $img = $profile->user->name . '.jpg';
         $this->activity = array(
             "time" => $last_activity->created_at->toW3cString(),
-            "name" => $profile->firstName. ' ' . $profile->lastName,
-            "img" => $img
+            "name" => $profile->firstName,
+            "img" => $img,
+            "index" => $profile->name
         );
     }
 
