@@ -23,7 +23,7 @@
         ]) !!};
     </script>
 </head>
-<body>
+<body class="pattern-bg">
 
     <div id="grad">
         <nav class="navbar navbar-default navbar-static-top" style="background-color: #333333">

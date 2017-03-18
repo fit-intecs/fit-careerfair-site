@@ -2,8 +2,11 @@
 
 @section('header')
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">--}}
+    <link rel="stylesheet" href="{{ URL::to('css/bootstrap-tokenfield.css') }}">
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+    {{--<link rel="stylesheet" href="{{ URL::to('css/main.css') }}">--}}
+@endsection
 
 @section('content')
 <div class="container">
@@ -139,6 +142,14 @@
                             <label for="techskills">Technical Skills</label>
                             <textarea class="form-control" id="techskills-modal" rows="3" name="techskills"></textarea>
                         </div>
+
+                        {{--<div class="form-group">--}}
+                            {{--<label for="techskills">Technical Skills</label>--}}
+                            {{--<textarea class="form-control" id="techskills" rows="3" name="techskills"></textarea>--}}
+                            {{--<input type="text" class="form-control" id="tokenfield" name="techskills" value="Java,C#.NET, Python" />--}}
+
+                        {{--</div>--}}
+
                         <div class="col-md-offset-11">
                             <input type="hidden" name="_token" value="{{Session::token()}}">
                         </div>
@@ -155,6 +166,19 @@
 
 </div>
 
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="{{ URL::to('js/bootstrap-tokenfield.js') }}"></script>
+<script>
+    $('#tokenfield').tokenfield({
+        autocomplete: {
+            source: ['Java', 'C#.NET', 'Python', 'Laravel', 'Spring'],
+            delay: 100
+        },
+        showAutocompleteOnFocus: true
+    })
+</script>
 <script>
     var token = '{{ Session::token() }}';
     var urlEdit = '{{ route('profile.edit') }}';
