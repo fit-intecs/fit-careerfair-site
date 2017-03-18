@@ -11,22 +11,16 @@
 |
 */
 
-$this->get('/', function () {
-    return view('welcome');
-})->name('root');
+$this->get('/', 'indexController@index')->name('root');
 
 $this->get('/mat', function () {
     return view('index');
 })->name('mat');
 
 $this->get('/students','StudentController@index')->name('students');
+$this->get('/companies','CompanyController@index')->name('companies');
 $this->get('/profileimage/{filename}', 'UserController@getUserImage')->name('profile.image');
-$this->get('/students/{id}',function($id){
-    $user = \App\User::where('name', $id)->first();
-    $profile = $user->profile;
-    $profile->index = $user->name;
-    return view('publicProfile',["profileDetails"=>$profile]);
-})->name('students_view');
+$this->get('/students/{id}/{count?}','StudentController@viewStudent')->name('students_view');
 
 
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -42,14 +36,23 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+$this::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/callback/{provider}', 'SocialAuthController@callback');
-Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
+$this::get('/callback/{provider}', 'SocialAuthController@callback');
+$this::get('/redirect/{provider}', 'SocialAuthController@redirect');
 
 
 
-Route::group(['middleware' => ['auth']], function () {
+$this::group(['middleware' => ['auth']], function () {
+
+    // This route group is belongs to admins be careful
+    $this::group(['prefix' => 'adm','middleware' => ['isAdmin']], function () {
+        $this->get('/','AdminController@index')->name('admin.dashboard');
+        $this->get('/companies','AdminController@companiesPage')->name('admin.companiesPage');
+        $this->get('/deleteCom/{id}','AdminController@deleteCompany')->name('admin.deleteCompany');
+        $this->post('/companies','AdminController@addCompany')->name('admin.addNewCompany');
+        $this->get('/ex_profiles','AdminController@exportProfileData')->name('admin.exportProfiles');
+    });
 
     $this->get('register', function () {
         return view('auth.register');
@@ -68,14 +71,23 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
+Route::get('fire', function () {
+    // this fires the event
+    event(new \App\Events\CFActivities());
+    return "event fired";
+});
+
+
+$this->get('/a',function(){
+    \Illuminate\Support\Facades\Redis::psubscribe(['*'], function ($message, $channel) {
+        echo $message;
+    });
+});
+
+
 $this->get('/test', function () { // for testing purpose
-    $faker = Faker\Factory::create();
-    for ($i=0; $i < 1000; $i++) {
-        try {
-        $values[]= str_replace([" ","."], [",",""], $faker->sentence);
-        } catch (\OverflowException $e) {
-        echo "There are only 9 unique digits not null, Faker can't generate 10 of them!";
-         }
-    }
-    dd($values);
+    $lastActivity = \Spatie\Activitylog\Models\Activity::all()->last(); //returns the last logged activity
+    var_dump($lastActivity->causer);
+    dd(\Spatie\Activitylog\Models\Activity::inLog('register')->get());
+    dd(\Spatie\Activitylog\Models\Activity::all());
 })->name('test');

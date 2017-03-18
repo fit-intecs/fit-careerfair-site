@@ -8,11 +8,16 @@
                         <div class="row" style="margin-left: 10px;">
                         <h3><div id="firstName">{{ $profileDetails->firstName }}</div> <div id="lastName"> {{$profileDetails->lastName}}</div></h3>
                         </div>
-                        @if (\Illuminate\Support\Facades\Storage::disk('local')->has($profileDetails->index  . '.jpg'))
-                                <img src="{{ route('profile.image', ['filename' => $profileDetails->index . '.jpg']) }}" alt="" class="img-responsive profile_img">
-                        @else
-                                <img src="/img/default-user.png" class="img-responsive profile_img">
-                        @endif
+                        <div class="panel panel-default">
+                            <div class="panel-body" style="width: 100%; height: 0; padding-bottom: 100%; overflow: hidden; display: table-row">
+                                @if (\Illuminate\Support\Facades\Storage::disk('local')->has($profileDetails->index  . '.jpg'))
+                                    <img src="{{ route('profile.image', ['filename' => $profileDetails->index . '.jpg']) }}" alt="" class="img-responsive">
+                                @else
+                                    <img src="/img/default-user.png" class="img-responsive" style="margin: auto">
+                                @endif
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="col-md-7 col-md-offset-1" style="margin-top: 70px;">

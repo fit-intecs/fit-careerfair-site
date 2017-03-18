@@ -24,11 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->status == 'first_time'){
+        //dd(Auth::user()->role);
+        if(Auth::user()->status == 'first_time' && Auth::user()->role != 'admin'){
             return redirect('/register');
+        }elseif(Auth::user()->role == 'admin'){
+            return redirect(route('admin.dashboard'));
         }
 
         $profile = Auth::user()->profile;
+        if(is_null($profile)){
+            return redirect(route('addProfileDetails'));
+        }
         return view('home',["profileDetails"=>$profile]);
     }
 }

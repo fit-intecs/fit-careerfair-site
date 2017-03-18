@@ -60,8 +60,18 @@ use \Illuminate\Routing;
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="{{ Route::is('root') ? 'active' : '' }}"><a href="/">Home</a></li>
-                <li class="{{ Route::is('companies') ? 'active' : '' }}"><a href="#">Companies</a></li>
-                <li class="{{ Route::is('students') ? 'active' : '' }}"><a href="/students">Students</a></li>
+                <li {{ !Route::is('root') ? "style=display:none": ""}}>
+                    <a class="page-scroll" href="#download">abot ITFac</a>
+                </li>
+                <li {{ !Route::is('root') ? "style=display:none": ""}}>
+                    <a class="page-scroll" href="#features">about IIntecs</a>
+                </li>
+                {{--<li {{ !Route::is('root') ? "style=display:none": ""}}>--}}
+                    {{--<a class="page-scroll" href="#contact">awards and acivements</a>--}}
+                {{--</li>--}}
+                {{--<li {{ !Route::is('root') ? "style=display:none": ""}}>--}}
+                    {{--<a class="page-scroll" href="#contact">our sponsors</a>--}}
+                </li>
             </ul>
             <form class="navbar-form navbar-left">
                 <div class="row">
@@ -72,15 +82,8 @@ use \Illuminate\Routing;
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li {{ !Route::is('root') ? "style=display:none": ""}}>
-                    <a class="page-scroll" href="#download">Download</a>
-                </li>
-                <li {{ !Route::is('root') ? "style=display:none": ""}}>
-                    <a class="page-scroll" href="#features">Features</a>
-                </li>
-                <li {{ !Route::is('root') ? "style=display:none": ""}}>
-                    <a class="page-scroll" href="#contact">Contact</a>
-                </li>
+                <li class="{{ Route::is('companies') ? 'active' : '' }}"><a href="/companies">Companies</a></li>
+                <li class="{{ Route::is('students') ? 'active' : '' }}"><a href="/students">Students</a></li>
                 @if (Route::has('login'))
 
                     @if (Auth::check())

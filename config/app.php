@@ -2,6 +2,8 @@
 
 return [
 
+    'broadcasting_block_time' => env('BLOCK_TIME', 1200), // seconds
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -177,6 +179,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Spatie\Activitylog\ActivitylogServiceProvider::class,
 
     ],
 

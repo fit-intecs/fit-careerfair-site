@@ -26,7 +26,7 @@
 <body class="pattern-bg">
 
     <div id="grad">
-        <nav class="navbar navbar-default navbar-static-top" style="background-color: #333333">
+        <nav class="navbar navbar-default navbar-static-top" style="background-color: #333333;">
             <div class="container">
                 <div class="navbar-header">
 
@@ -57,14 +57,17 @@
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                         @else
-                            <li>
-                            @if(\Illuminate\Support\Facades\Auth::user()->profile)
-                                    <a href="#" class="edit" style="color: #ffffff">Edit Details</a>
+                            @if(!(Auth::user()->role == 'admin'))
+                                <li>
+                                @if(\Illuminate\Support\Facades\Auth::user()->profile)
+                                        <a href="#" class="edit" style="color: #ffffff">Edit Details</a>
 
-                            @else
-                                    <a href="{{ route('addProfileDetails') }} " style="color: #ffffff">Add Details</a>
+                                @else
+
+                                        <a href="{{ route('addProfileDetails') }} " style="color: #ffffff">Add Details</a>
+                                @endif
+                                </li>
                             @endif
-                            </li>
                             <li class="dropdown">
                                 <a href="{{ url('home') }}" class="dropdown-toggle" data-toggle="dropdown" style="color: #ffffff" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -100,6 +103,8 @@
     </div>
 
     <!-- Scripts -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ URL::to('js/main.js') }}"></script>
 </body>

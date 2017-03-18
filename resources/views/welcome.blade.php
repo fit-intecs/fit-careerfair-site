@@ -2,6 +2,54 @@
 
 @section('head')
     @parent
+    <style>
+        .livefeed .well{
+            background-color: #FAFAFA;'rgba(231, 205, 232, 0.64) !important;
+            position: relative;
+            padding: 10px !important;
+            margin: 0px !important;
+            color: #2e3b4e;
+            border-radius: 0px !important;
+            -webkit-box-shadow: 2px 3px 12px 0px rgba(35, 8, 34, 0.27) !important;
+            box-shadow: 2px 3px 12px 0px rgba(35, 8, 34, 0.27) !important;
+        }
+
+        .feedContainer{
+            padding: 10px;
+            'background-color: rgba(0, 0, 0, 0.17);
+            border: solid 0px;
+            border-radius: 3px;
+        }
+        .scroller{
+            overflow-y: scroll;
+            height: 70%;
+        }
+
+        span.time-ago {
+            float: right;
+            line-height: 20px;
+            color: #8A8A9A;
+            font-size: x-small;
+        }
+
+        .scroller div:nth-of-type(odd){
+            border-right: solid 5px #ae88ba;
+        }
+        .scroller div:nth-of-type(even){
+            border-left: solid 5px rgb(196, 154, 190);
+        }
+
+        #views-list a{
+            color: #41A6DB;
+        }
+
+        #views-list img{
+            -webkit-box-shadow: 2px 3px 12px 0px rgba(35, 8, 34, 0.27) !important;
+            box-shadow: 2px 3px 12px 0px rgba(35, 8, 34, 0.27) !important;
+            margin-right: 5px;
+        }
+
+    </style>
 @endsection
 
 @section('header')
@@ -16,23 +64,29 @@
             <div class="row">
                 <div class="col-sm-7">
                     <div class="header-content">
-                        <div class="header-content-inner">
-                            <h1>New Age is an app landing page that will help you beautifully showcase your new mobile app, or anything else!</h1>
+                        <div class="header-content-inner livefeed">
+                            <h1>FIT Future Careers,</h1>
+                            <h2>the in-house recruitment program of the Faculty of Information Technology, University of Moratuwa !</h2>
                             <a href="#download" class="btn btn-outline btn-xl page-scroll">Start Now for Free!</a>
+
                         </div>
+
                     </div>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-4 col-sm-offset-1 livefeed">
+
                     <div class="device-container">
-                        <div class="device-mockup iphone6_plus portrait white">
-                            <div class="device">
-                                <div class="screen">
-                                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                                    <img src="img/demo-screen-1.jpg" class="img-responsive" alt="">
+                        <div class="feedContainer">
+                            <div id="views-list" class="scroller">
+                                @foreach($data as $key=>$prof_view)
+                                <div class='well well-sm' style='width: 100%; min-height: 40px; z-index: {{count($data)-$key}}'>
+                                    <img width='30px' height='30px' src='/logo/{{rand(0,29)}}.jpg'>
+                                    <a target='_blank' href="{{route('students_view',['id'=>$prof_view->causer->user->name,'count'=>'false'])}}">{{$prof_view->causer->firstName}}'s</a> profile has been viewed
+                                    <br><span class="time-ago"></span>
+                                    <div style='clear:both'></div>
+                                    <span class="times" hidden>{{$prof_view->created_at->toW3cString()}}</span>
                                 </div>
-                                <div class="button">
-                                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -47,11 +101,13 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <h2 class="section-heading">Discover what all the buzz is about!</h2>
-                    <p>Our app is available on any mobile device! Download now to get started!</p>
-                    <div class="badges">
-                        <a class="badge-link" href="#"><img src="img/google-play-badge.svg" alt=""></a>
-                        <a class="badge-link" href="#"><img src="img/app-store-badge.svg" alt=""></a>
-                    </div>
+                    <p>
+                        INTECS was formed by a group of students from the IT Faculty in 2002 <br>
+                        with the aim of building up awareness within the students of the Faculty <br>
+                        about the field of Information Technology, and to expose undergraduates to unique opportunities
+                        <br>
+                        within the IT Industry of Sri Lanka and beyond. <br>
+                    </p>
                 </div>
             </div>
         </div>
@@ -170,4 +226,96 @@
 
 @section('scripts')
     @parent
+    <script>
+
+        function timeSince(date) {
+
+            var seconds = Math.floor((new Date() - date) / 1000);
+
+            var interval = Math.floor(seconds / 31536000);
+
+            if (interval > 1) {
+                return interval + " years ago";
+            }else if(interval == 1){
+                return interval + " year ago";
+            }
+            interval = Math.floor(seconds / 2592000);
+            if (interval > 1) {
+                return interval + " months ago";
+            }else if(interval == 1){
+                return interval + " month ago";
+            }
+            interval = Math.floor(seconds / 86400);
+            if (interval > 1) {
+                return interval + " hours ago";
+            }else if(interval == 1){
+                return interval + " hour ago";
+            }
+            interval = Math.floor(seconds / 3600);
+            if (interval > 1) {
+                return interval + " hours ago";
+            }else if(interval == 1){
+                return interval + " hour ago";
+            }
+            interval = Math.floor(seconds / 60);
+            if (interval > 1) {
+                return interval + " minutes ago";
+            }else if(interval == 1){
+                return interval + " minute ago";
+            }
+            return "just now";
+        }
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+
+
+        timerefresh();
+
+
+        var id = {{count($data)}}+1;
+
+
+        var id = {{count($data)}}+1;
+
+        window.Echo.channel('CFSite').listen('.profile_views', function (data) {
+
+            var ago = timeSince(new Date(data.activity.time)); //2017-03-12T17:51:22+00:00
+
+            var view = $("<div class='well well-sm' style='width: 100%; min-height: 60px'>").css("z-index", id)
+                    .append($("<img width='30px' height='30px'>").attr('src','/logo/' + getRandomInt(0,29) + '.jpg'))
+                    .append($("<a target='_blank'></a>").attr('href','/students/'+ data.activity.index+ '/false').text(data.activity.name + '\'s')).append(' profile has been viewed')
+                    .append($("<br><span class='time-ago'></span>").text(ago))
+                    .append("<div style='clear:both'></div>")
+                    .append($("<span class='times' hidden></span>").text(data.activity.time));
+
+            $('#views-list').prepend(view.css('opacity', 0)
+                    .slideDown('fast')
+                    .animate(
+                            { opacity: 1 },
+                            { queue: false, duration: 'slow' }
+                    ));
+            id++;
+        });
+
+        function timerefresh(){
+            $('.times').each(function (index, value) {
+                newtime = timeSince(new Date($(this).text()));
+                agoElement = $(this).prev().prev();
+                oldtime = agoElement.text();
+                if(newtime !== oldtime){
+                    agoElement.fadeTo( 500, 0 );
+                    agoElement.text(newtime).fadeTo( 0, 0).fadeTo( 1000, 1 );
+                }
+            });
+        }
+
+        setInterval(function(){
+            timerefresh();
+        }, 1000*10);
+
+    </script>
 @endsection

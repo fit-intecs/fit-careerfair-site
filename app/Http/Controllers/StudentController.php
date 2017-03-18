@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CFActivities;
 use App\Profile;
+use App\User;
+use Carbon\Carbon;
 use Faker\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Spatie\Activitylog\Models\Activity;
 
 class StudentController extends Controller
 {
@@ -24,5 +29,25 @@ class StudentController extends Controller
             'students' => $profiles
         );
         return view('students', $page_data);
+    }
+
+    public function viewStudent($id,$count='true', Request $request){
+        $user = User::where('name', $id)->first();
+        $profile = $user->profile;
+        $profile->index = $user->name;
+
+        $dt = Carbon::now()->subSeconds(Config::get('app.broadcasting_block_time'));
+
+        $lastFromThisIP = Activity::where('created_at','>=',$dt)->where('description',$request->ip())->where('causer_id',$user->id)->first();
+
+        if(is_null($lastFromThisIP) and $count == 'true'){
+            activity('profile_view')
+                ->causedBy($profile)
+                ->log($request->ip());
+
+            event(new CFActivities());
+        }
+
+        return view('publicProfile',["profileDetails"=>$profile]);
     }
 }
