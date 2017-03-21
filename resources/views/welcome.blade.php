@@ -2,6 +2,8 @@
 
 @section('head')
     @parent
+    <script src="https://unpkg.com/react@15/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
     <style>
         .livefeed .well{
             background-color: #FAFAFA;'rgba(231, 205, 232, 0.64) !important;

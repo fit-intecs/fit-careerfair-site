@@ -180,6 +180,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
 
     ],
 

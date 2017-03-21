@@ -73,11 +73,11 @@ use \Illuminate\Routing;
                     {{--<a class="page-scroll" href="#contact">our sponsors</a>--}}
                 </li>
             </ul>
-            <form class="navbar-form navbar-left">
+            <form class="navbar-form navbar-left" {{ !Route::is('students') ? "style=display:none": ""}}>
                 <div class="row">
                     <div class="col-lg-12">
                         <i class="fa fa-search"></i>
-                        <input type="text" class="form-control col-sm-8" placeholder="Search">
+                        <input type="text" id="q" style="width:30vw;" class="form-control col-sm-8" placeholder="Search">
                     </div>
                 </div>
             </form>
