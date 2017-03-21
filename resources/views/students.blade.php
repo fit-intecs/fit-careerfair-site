@@ -81,8 +81,8 @@
 
 
         var search = instantsearch({
-            appId: 'SJVT4MYY9W',
-            apiKey: '00c555e851bafeb934e53535d7c4f6fd',
+            appId: '{{env('ALGOLIA_APP_ID', 'SJVT4MYY9W')}}',
+            apiKey: '{{env('SEARCH_KEY', '00c555e851bafeb934e53535d7c4f6fd')}}',
             indexName: 'profiles',
             urlSync: {}
         });
