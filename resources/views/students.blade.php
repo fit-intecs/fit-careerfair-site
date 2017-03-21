@@ -8,6 +8,12 @@
             font-style: normal;
             color: #ffbe18;
         }
+        .ais-infinite-hits--showmore button{
+            border-radius: 5px;
+            border: solid 1px #8c8a8a;
+            box-shadow: none;
+            background-color: #ffbe62;
+        }
     </style>
 @endsection
 
@@ -55,6 +61,7 @@
                     {{--</div>--}}
                 {{--@endforeach--}}
             </div>
+
             {{--<div style="padding-left: 20px">{{ $students->links() }}</div>--}}
         </div>
     </div>
@@ -92,13 +99,13 @@
                 '<div class="item">' +
                     '<div class="list-group-item">' +
                         '<div class="row-picture">' +
-                            '<img class="circle" src="img/default-user.png" alt="icon">' +
+                            '<img class="circle" src="img/student.jpg" alt="icon">' +
                         '</div>' +
                         '<div class="row-content">' +
                             '<h4 style="font-weight: 500;" class="list-group-item-heading">\{\{\{_highlightResult.firstName.value\}\}\} \{\{\{_highlightResult.lastName.value\}\}\}</h4>' +
                             '<p class="list-group-item-text text-justify">\{\{\{_highlightResult.objective.value\}\}\}</p>' +
-                            '<span style="margin-bottom: 10px" class="label label-default">\{\{\{_highlightResult.techs.value\}\}\}</span>' +
-                            '<a style="color: #00b0ff; float: right" onclick="viewProfile(\'124008h\');" class="btn btn-raised btn-xs">read more</a>' +
+                            '<span style="margin-bottom: 10px" class="label label-default">' + '\{\{\{_highlightResult.techs.value\}\}\}</span>' +
+                            '<a style="color: #00b0ff; float: right" onclick="viewProfile(\'\{\{index\}\}\');" class="btn btn-raised btn-xs">read more</a>' +
                         '</div>' +
                     '</div>' +
                     '<div class="list-group-separator"></div>' +
@@ -109,34 +116,42 @@
                 instantsearch.widgets.infiniteHits({
                     container: '#student-list',
                     hitsPerPage: 10,
+                    cssClasses: 'btn btn-default',
                     templates: {
-                        item: hitTemplate
+                        item: function(data) {
+                            var techArray = data._highlightResult.techs.value.split(',');
+                            var techhtml = '';
+
+
+                            techArray.forEach(function(tech) {
+                                techhtml = techhtml.concat('<span style="margin-bottom: 10px" class="label label-default">' + tech +'</span>');
+                            });
+
+                            return '<div class="item">' +
+                                    '<div class="list-group-item">' +
+                                    '<div class="row-picture">' +
+                                    '<img class="circle" src="img/student.jpg" alt="icon">' +
+                                    '</div>' +
+                                    '<div class="row-content">' +
+                                    '<h4 style="font-weight: 500;" class="list-group-item-heading">'+ data._highlightResult.firstName.value + ' ' +data._highlightResult.lastName.value + '</h4>' +
+                                    '<p class="list-group-item-text text-justify">'+data._highlightResult.objective.value+'</p>' +
+                                    techhtml +
+                                    '<a style="color: #00b0ff; float: right" onclick="viewProfile(\''+ data.index +'\');" class="btn btn-raised btn-xs">read more</a>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div class="list-group-separator"></div>' +
+                                    '</div>';
+                        }
                     }
                 })
         );
 
         search.start();
 
-
-        // firstname
-        index.search('kokila', function(err, content) {
-            console.log(content.hits);
-        });
-
-        // firstname with typo
-        index.search('kokla', function(err, content) {
-            console.log(content.hits);
-        });
-
-        // a company
-        index.search('laravel', function(err, content) {
-            console.log(content.hits);
-        });
-
-        // a firstname & company
-        index.search('lorem', function(err, content) {
-            console.log(content.hits);
-        });
+        search.templatesConfig.helpers.techs = function(/*text, render*/) {
+            var discount = this.price * 0.3;
+            return '$ -' + discount;
+        };
 
         function viewProfile(index){
             $('.modal').modal('show');

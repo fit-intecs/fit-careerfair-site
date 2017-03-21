@@ -72,9 +72,7 @@ $this::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('fire', function () {
-    // this fires the event
-    event(new \App\Events\CFActivities());
-    return "event fired";
+    dd(\App\Profile::find(1)->toSearchableArray());
 });
 
 

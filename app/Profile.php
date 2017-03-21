@@ -14,6 +14,7 @@ class Profile extends Model
     {
         $array = $this->toArray();
 
+        $array["index"] = $this->user->name;
         // Customize array...
 
         return $array;
