@@ -23,7 +23,7 @@
             border-radius: 3px;
         }
         .scroller{
-            overflow-y: scroll;
+            overflow-y: auto;
             height: 70%;
         }
 
@@ -34,12 +34,12 @@
             font-size: x-small;
         }
 
-        .scroller div:nth-of-type(odd){
-            border-right: solid 5px #ae88ba;
-        }
-        .scroller div:nth-of-type(even){
-            border-left: solid 5px rgb(196, 154, 190);
-        }
+        /*.scroller div:nth-of-type(odd){*/
+            /*border-right: solid 5px #ae88ba;*/
+        /*}*/
+        /*.scroller div:nth-of-type(even){*/
+            /*border-left: solid 5px rgb(196, 154, 190);*/
+        /*}*/
 
         #views-list a{
             color: #41A6DB;
