@@ -27,6 +27,11 @@
             height: 70%;
         }
 
+        .scroller::-webkit-scrollbar{
+            background-color: transparent;
+            width: 0;
+        }
+
         span.time-ago {
             float: right;
             line-height: 20px;
