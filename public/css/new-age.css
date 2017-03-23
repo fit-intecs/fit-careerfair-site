@@ -173,9 +173,9 @@ header {
   overflow-y: hidden;
   background: url("../img/bg-pattern.png"), #7b4397;
   /* fallback for old browsers */
-  background: url("../img/bg-pattern.png"), -webkit-linear-gradient(to left, rgba(123, 67, 151, 0.67), rgba(220, 36, 48, 0.28));
+  background: url("../img/bg-pattern.png"), -webkit-linear-gradient(to left, rgba(59, 89, 153, 1), rgb(75, 151, 208));
   /* Chrome 10-25, Safari 5.1-6 */
-  background: url("../img/bg-pattern.png"), linear-gradient(to left, rgba(123, 67, 151, 0.67), rgba(220, 36, 48, 0.28));
+  background: url("../img/bg-pattern.png"), linear-gradient(to left, rgba(59, 89, 153, 1), rgb(75, 151, 208));
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: white;
 }
