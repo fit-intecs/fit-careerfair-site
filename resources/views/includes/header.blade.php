@@ -61,10 +61,10 @@ use \Illuminate\Routing;
             <ul class="nav navbar-nav">
                 <li class="{{ Route::is('root') ? 'active' : '' }}"><a href="/">Home</a></li>
                 <li {{ !Route::is('root') ? "style=display:none": ""}}>
-                    <a class="page-scroll" href="#download">abot ITFac</a>
+                    <a class="page-scroll" href="#download">about ITFac</a>
                 </li>
                 <li {{ !Route::is('root') ? "style=display:none": ""}}>
-                    <a class="page-scroll" href="#features">about IIntecs</a>
+                    <a class="page-scroll" href="#features">about Intecs</a>
                 </li>
                 {{--<li {{ !Route::is('root') ? "style=display:none": ""}}>--}}
                     {{--<a class="page-scroll" href="#contact">awards and acivements</a>--}}

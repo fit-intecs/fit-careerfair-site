@@ -73,8 +73,8 @@
                     <div class="header-content">
                         <div class="header-content-inner livefeed">
                             <h1>FIT Future Careers,</h1>
-                            <h2>the in-house recruitment program of the Faculty of Information Technology, University of Moratuwa !</h2>
-                            <a href="#download" class="btn btn-outline btn-xl page-scroll">Start Now for Free!</a>
+                            <h2>The in-house recruitment program of the Faculty of Information Technology, University of Moratuwa!</h2>
+                            <a href="#download" class="btn btn-outline btn-xl page-scroll">Learn more</a>
 
                         </div>
 
