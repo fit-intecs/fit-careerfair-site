@@ -19,18 +19,21 @@
                 <div class="panel-body">
                 <form method="post" action="{{ route('postProfileDetails') }}">
 
-                    <div class="form-group{{ $errors->has('firstName') ? ' has-error' : '' }}">
+                    <div class="col-md-2 selected_img">
+                        <img src="/profilepics/{{$thumbs[0]}}" alt="">
+                    </div>
+
+                    <div class="form-group col-md-10">
                         <label for="firstName">Select your profile picture</label>
 
-                        <select class="image-picker show-html">
+                        <select id="select_profile_pic" class="image-picker show-html" name="profile_img">
                             @foreach($thumbs as $thumb)
                                 <img src="/profilepics/{{$thumb}}" alt="">
-                                <option data-img-src="/profilepics/{{$thumb}}" data-img-alt="{{$thumb}}" value="/profilepics/{{$thumb}}">  {{$thumb}}  </option>
+                                <option data-img-src="/profilepics/{{$thumb}}" data-img-alt="{{$thumb}}" value="{{$thumb}}">  {{$thumb}}  </option>
                             @endforeach
                         </select>
 
-
-                        <small id="emailHelp" class="form-text text-muted">Your first name will be shared publicly.</small>
+                        <small id="emailHelp" class="form-text text-muted">Please select your one.</small>
                     </div>
                     <div class="form-group{{ $errors->has('firstName') ? ' has-error' : '' }}">
                         <label for="firstName">First Name</label>
@@ -159,7 +162,12 @@
     <script src="{{ asset('image-picker/image-picker.js') }}"></script>
 
     <script>
-        $("select").imagepicker();
+        $("#select_profile_pic").imagepicker({selected: function(){
+            var sel = $('.selected>img').attr('src');
+            $('.selected_img>img').attr('src',sel);
+        }});
+
+
         $('#tokenfield').tokenfield({
             autocomplete: {
                 source: ['Java', 'C#.NET', 'Python', 'Laravel', 'Spring'],

@@ -70,7 +70,7 @@
                                 </li>
                             @endif
                             <li class="dropdown">
-                                <a href="{{ url('home') }}" class="dropdown-toggle" data-toggle="dropdown" style="color: #ffffff" role="button" aria-expanded="false">
+                                <a href="{{ url('home') }}" class="dropdown-toggle" data-toggle="dropdown" style="color: #ffffff" role="button">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -106,7 +106,6 @@
     <!-- Scripts -->
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ URL::to('js/main.js') }}"></script>
 </body>
 </html>
