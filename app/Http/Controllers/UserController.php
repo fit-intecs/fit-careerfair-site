@@ -14,6 +14,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -21,7 +22,17 @@ class UserController extends Controller{
 
     public function getAddUserProfileDetails()
     {
-        return view('user-profile.add_user_profile_details');
+        $files = File::allFiles(public_path().'/profilepics/');
+
+        $thumbs = [];
+        foreach ($files as $file) {
+            $filename = $file->getFilename();
+            if(substr( $filename, 0, 3 ) === "TN_"){
+                array_push($thumbs,$file->getFilename());
+            }
+        }
+
+        return view('user-profile.add_user_profile_details',['thumbs'=>$thumbs]);
     }
 
     public function postAddUserProfileDetails(Request $request)

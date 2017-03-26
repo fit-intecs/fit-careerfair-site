@@ -68,11 +68,10 @@ $this::group(['middleware' => ['auth']], function () {
     $this->post('profiledetails', 'UserController@postAddUserProfileDetails')->name('postProfileDetails');
     $this->post('edit', 'UserController@postEditProfile')->name('profile.edit');
 
-
 });
 
 Route::get('fire', function () {
-    dd(\App\Profile::find(1)->toSearchableArray());
+    dd($files = File::allFiles(public_path().'/img/'));
 });
 
 

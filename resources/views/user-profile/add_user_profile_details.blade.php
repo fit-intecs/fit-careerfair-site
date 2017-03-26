@@ -20,6 +20,19 @@
                 <form method="post" action="{{ route('postProfileDetails') }}">
 
                     <div class="form-group{{ $errors->has('firstName') ? ' has-error' : '' }}">
+                        <label for="firstName">Select your profile picture</label>
+
+                        <select class="image-picker show-html">
+                            @foreach($thumbs as $thumb)
+                                <img src="/profilepics/{{$thumb}}" alt="">
+                                <option data-img-src="/profilepics/{{$thumb}}" data-img-alt="{{$thumb}}" value="/profilepics/{{$thumb}}">  {{$thumb}}  </option>
+                            @endforeach
+                        </select>
+
+
+                        <small id="emailHelp" class="form-text text-muted">Your first name will be shared publicly.</small>
+                    </div>
+                    <div class="form-group{{ $errors->has('firstName') ? ' has-error' : '' }}">
                         <label for="firstName">First Name</label>
                         <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="Enter First Name" value="{{ old('firstName') }}" name="firstName">
                         @if ($errors->has('firstName'))
@@ -29,6 +42,7 @@
                         @endif
                         <small id="emailHelp" class="form-text text-muted">Your first name will be shared publicly.</small>
                     </div>
+
                     <div class="form-group{{ $errors->has('lastName') ? ' has-error' : '' }}">
                         <label for="lastName">Last Name</label>
                         <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Enter email" value="{{ old('lastName') }}" name="lastName">
@@ -142,8 +156,10 @@
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="{{ URL::to('js/bootstrap-tokenfield.js') }}"></script>
+    <script src="{{ asset('image-picker/image-picker.js') }}"></script>
 
     <script>
+        $("select").imagepicker();
         $('#tokenfield').tokenfield({
             autocomplete: {
                 source: ['Java', 'C#.NET', 'Python', 'Laravel', 'Spring'],

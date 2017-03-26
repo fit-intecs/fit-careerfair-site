@@ -15,6 +15,7 @@
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('image-picker/image-picker.css') }}" rel="stylesheet">
     @yield('header')
     <!-- Scripts -->
     <script>
