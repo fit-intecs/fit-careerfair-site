@@ -54,7 +54,7 @@
     </header>
 
 
-    <section id="download" class="download bg-primary text-center">
+    <section id="download" class="download text-center">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
@@ -89,7 +89,7 @@
                             <div class="device">
                                 <div class="screen">
                                     <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                                    <img src="img/demo-screen-1.jpg" class="img-responsive" alt=""> </div>
+                                    <img src="https://business.fiu.edu/careers/img/FIU-CMS-Banner.jpg" class="img-responsive" alt=""> </div>
                                 <div class="button">
                                     <!-- You can hook the "home button" to some JavaScript events or just remove it -->
                                 </div>
@@ -147,7 +147,7 @@
         <div class="overlay"></div>
     </section>
 
-    <section id="contact" class="contact bg-primary">
+    <section id="contact" class="contact">
         <div class="container">
             <h2>We <i class="fa fa-heart"></i> new friends!</h2>
             <ul class="list-inline list-social">

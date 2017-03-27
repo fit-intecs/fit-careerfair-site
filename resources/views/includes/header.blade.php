@@ -2,9 +2,9 @@
 use \Illuminate\Routing;
 ?>
 <div class="container">
-<h1 class="header" >
-    <img style="display: inline" src="/img/mora_logo.png" class="img-responsive">
-    FIT Careers
+<h1 class="header" style="margin-top: 5px">
+    <img style="display: inline; height: 72px" src="/img/cflogo.png" class="img-responsive">
+    {{--FIT Careers--}}
 </h1>
 </div>
 
