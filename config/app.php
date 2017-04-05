@@ -181,6 +181,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
+        TeamTNT\Scout\TNTSearchScoutServiceProvider::class,
 
     ],
 

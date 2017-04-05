@@ -10,12 +10,22 @@ class Profile extends Model
 
     use Searchable;
 
+    protected $appends = ["index"];
+
+    public function getIndexAttribute()
+    {
+        return $this->user->name;
+    }
+
     public function toSearchableArray()
     {
         $array = $this->toArray();
 
         $array["index"] = $this->user->name;
         // Customize array...
+
+        unset($array["user"]);
+
 
         return $array;
     }

@@ -23,7 +23,7 @@
                 <div class="col-sm-7">
                     <div class="header-content">
                         <div class="header-content-inner livefeed">
-                            <h1>FIT Future Careers,</h1>
+                            <h1>FIT Future Careers 2017</h1>
                             <h2>The in-house recruitment program of the Faculty of Information Technology, University of Moratuwa!</h2>
                             <a href="#download" class="btn btn-outline btn-xl page-scroll">Learn more</a>
 
@@ -184,6 +184,7 @@
 
 @section('scripts')
     @parent
+    <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
     <script>
 
         function timeSince(date) {

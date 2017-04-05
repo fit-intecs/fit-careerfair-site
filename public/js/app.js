@@ -154,9 +154,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+window.Pusher = __webpack_require__(5);
+
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
-  broadcaster: 'socket.io',
-  host: window.location.hostname + ':6001'
+  broadcaster: 'pusher',
+  key: '10d7c7ca5fff739c2ece',
+  cluster: 'ap1'
 });
 
 //window.Echo.channel('CFSite').listen('messages.new', (data) => {
@@ -10605,7 +10608,7 @@ var Connector = function () {
                 return window['Laravel'].csrfToken;
             } else if (this.options.csrfToken) {
                 return this.options.csrfToken;
-            } else if (document && (selector = document.querySelector('meta[name="csrf-token"]'))) {
+            } else if (typeof document !== 'undefined' && (selector = document.querySelector('meta[name="csrf-token"]'))) {
                 return selector.getAttribute('content');
             }
             return null;
@@ -11082,9 +11085,6 @@ var Echo = function () {
             this.registerjQueryAjaxSetup();
         }
         if (this.options.broadcaster == 'pusher') {
-            if (!window['Pusher']) {
-                window['Pusher'] = __webpack_require__(5);
-            }
             this.connector = new PusherConnector(this.options);
         } else if (this.options.broadcaster == 'socket.io') {
             this.connector = new SocketIoConnector(this.options);

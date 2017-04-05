@@ -13,13 +13,16 @@
 
 $this->get('/', 'indexController@index')->name('root');
 
-$this->get('/mat', function () {
+$this->get('/driveLink', function () {
+    dd($_GET['link']);
     return view('index');
 })->name('mat');
 
 $this->get('/students','StudentController@index')->name('students');
+$this->get('/students/search','StudentSearchController@search')->name('stdSearch');
 $this->get('/companies','CompanyController@index')->name('companies');
 $this->get('/profileimage/{filename}', 'UserController@getUserImage')->name('profile.image');
+$this->get('/cv/{filename}', 'UserController@getUserCV')->name('profile.cv');
 $this->get('/students/{id}/{count?}','StudentController@viewStudent')->name('students_view');
 
 
@@ -65,20 +68,24 @@ $this::group(['middleware' => ['auth']], function () {
      * */
 
     $this->get('addprofiledetails', 'UserController@getAddUserProfileDetails')->name('addProfileDetails');
+    $this->get('editProfile', 'UserController@getEditProfileDetails')->name('getEditProfileDetails');
     $this->post('profiledetails', 'UserController@postAddUserProfileDetails')->name('postProfileDetails');
     $this->post('edit', 'UserController@postEditProfile')->name('profile.edit');
 
 });
 
 Route::get('fire', function () {
-    dd($files = File::allFiles(public_path().'/img/'));
+    event(new \App\Events\CFActivities('Hi there Pusher!'));
+    return "Event has been sent!";
 });
 
 
 $this->get('/a',function(){
-    \Illuminate\Support\Facades\Redis::psubscribe(['*'], function ($message, $channel) {
-        echo $message;
-    });
+    if(\App\User::find(3)->profile){
+        dd("qwe");
+    }else{
+        dd("asd");
+    }
 });
 
 

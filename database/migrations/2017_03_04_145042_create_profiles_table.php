@@ -15,17 +15,17 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->String('firstName');
             $table->String('lastName');
-            $table->String('phone');
+            $table->String('phone')->nullable();
             $table->String('degree');
-            $table->String('linkedinLink');
+            $table->String('linkedinLink')->nullable();
+            $table->String('profile_img')->default("default-user.jpg");
+            $table->String('cv_link');
             $table->text('objective');
             $table->text('techs');
             $table->integer('user_id');
-            $table->integer('achievement_id');
-            $table->integer('final_project');
+            $table->timestamps();
         });
     }
 

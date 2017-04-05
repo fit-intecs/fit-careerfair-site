@@ -2,7 +2,6 @@
 
 @section('head')
     @parent
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
     <style>
         .list-group-item em{
             font-style: normal;
@@ -14,6 +13,7 @@
             box-shadow: none;
             background-color: #ffbe62;
         }
+        .highlight { background-color: yellow }
     </style>
 @endsection
 
@@ -41,25 +41,25 @@
         <div id="student" class="panel-body">
             {{--<div style="text-align: right; padding-right: 20px">{{ $students->links() }}</div>--}}
             <div id="student-list" class="list-group">
-                {{--@foreach($students as $student)--}}
-                    {{--<div class="item">--}}
-                        {{--<div class="list-group-item">--}}
-                            {{--<div class="row-picture">--}}
-                                {{--<img class="circle" src="{{$student->img}}" alt="icon">--}}
-                            {{--</div>--}}
-                            {{--<div class="row-content">--}}
-                                {{--<h4 style="font-weight: 500;" class="list-group-item-heading">{{$student->firstName}} {{$student->lastName}}</h4>--}}
+                @foreach($students as $student)
+                    <div class="item">
+                        <div class="list-group-item">
+                            <div class="row-picture">
+                                <img class="circle" src="profilepics/{{$student->profile_img}}" alt="icon">
+                            </div>
+                            <div class="row-content">
+                                <h4 style="font-weight: 500;" class="list-group-item-heading">{{$student->firstName}} {{$student->lastName}}</h4>
 
-                                {{--<p class="list-group-item-text text-justify">{{$student->objective}}</p>--}}
-                                {{--@foreach(explode(",", $student->techs) as $tech)--}}
-                                    {{--<span style="margin-bottom: 10px" class="label label-default">{{$tech}}</span>--}}
-                                {{--@endforeach--}}
-                                {{--<a style="color: #00b0ff; float: right" onclick="viewProfile('{{$student->index}}');" class="btn btn-raised btn-xs">read more</a>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="list-group-separator"></div>--}}
-                    {{--</div>--}}
-                {{--@endforeach--}}
+                                <p class="list-group-item-text text-justify">{{$student->objective}}</p>
+                                @foreach(explode(",", $student->techs) as $tech)
+                                    <span style="margin-bottom: 10px" class="label label-default">{{$tech}}</span>
+                                @endforeach
+                                <a style="color: #00b0ff; float: right" onclick="viewProfile('{{$student->index}}');" class="btn btn-raised btn-xs">read more</a>
+                            </div>
+                        </div>
+                        <div class="list-group-separator"></div>
+                    </div>
+                @endforeach
             </div>
 
             {{--<div style="padding-left: 20px">{{ $students->links() }}</div>--}}
@@ -74,84 +74,59 @@
 
 @section('scripts')
 @parent
-<script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+<script>
+    jQuery.fn.highlight=function(c){function e(b,c){var d=0;if(3==b.nodeType){var a=b.data.toUpperCase().indexOf(c),a=a-(b.data.substr(0,a).toUpperCase().length-b.data.substr(0,a).length);if(0<=a){d=document.createElement("span");d.className="highlight";a=b.splitText(a);a.splitText(c.length);var f=a.cloneNode(!0);d.appendChild(f);a.parentNode.replaceChild(d,a);d=1}}else if(1==b.nodeType&&b.childNodes&&!/(script|style)/i.test(b.tagName))for(a=0;a<b.childNodes.length;++a)a+=e(b.childNodes[a],c);return d} return this.length&&c&&c.length?this.each(function(){e(this,c.toUpperCase())}):this};jQuery.fn.removeHighlight=function(){return this.find("span.highlight").each(function(){this.parentNode.firstChild.nodeName;with(this.parentNode)replaceChild(this.firstChild,this),normalize()}).end()};
+</script>
 
 {{--<script src="/js/jquery.jscroll.min.js"></script>--}}
     <script>
 
 
-        var search = instantsearch({
-            appId: '{{env('ALGOLIA_APP_ID', 'SJVT4MYY9W')}}',
-            apiKey: '{{env('SEARCH_KEY', '00c555e851bafeb934e53535d7c4f6fd')}}',
-            indexName: 'profiles',
-            urlSync: {}
-        });
-
-        search.addWidget(
-                instantsearch.widgets.searchBox({
-                    container: '#q',
-                    placeholder: 'Search for students...'
-                })
-        );
-
 
         var hitTemplate =
                 '<div class="item">' +
-                    '<div class="list-group-item">' +
-                        '<div class="row-picture">' +
-                            '<img class="circle" src="img/student.jpg" alt="icon">' +
-                        '</div>' +
-                        '<div class="row-content">' +
-                            '<h4 style="font-weight: 500;" class="list-group-item-heading">\{\{\{_highlightResult.firstName.value\}\}\} \{\{\{_highlightResult.lastName.value\}\}\}</h4>' +
-                            '<p class="list-group-item-text text-justify">\{\{\{_highlightResult.objective.value\}\}\}</p>' +
-                            '<span style="margin-bottom: 10px" class="label label-default">' + '\{\{\{_highlightResult.techs.value\}\}\}</span>' +
-                            '<a style="color: #00b0ff; float: right" onclick="viewProfile(\'\{\{index\}\}\');" class="btn btn-raised btn-xs">read more</a>' +
-                        '</div>' +
-                    '</div>' +
-                    '<div class="list-group-separator"></div>' +
+                '<div class="list-group-item">' +
+                '<div class="row-picture">' +
+                '<img class="circle" src="profilepics/\{\{\{profile_img\}\}\}" alt="icon">' +
+                '</div>' +
+                '<div class="row-content">' +
+                '<h4 style="font-weight: 500;" class="list-group-item-heading">\{\{\{firstName\}\}\} \{\{\{lastName\}\}\}</h4>' +
+                '<p class="list-group-item-text text-justify">\{\{\{objective\}\}\}</p>' +
+                '<span style="margin-bottom: 10px" class="label label-default">' + '\{\{\{techs\}\}\}</span>' +
+                '<a style="color: #00b0ff; float: right" onclick="viewProfile(\'\{\{index\}\}\');" class="btn btn-raised btn-xs">read more</a>' +
+                '</div>' +
+                '</div>' +
+                '<div class="list-group-separator"></div>' +
                 '</div>';
 
+        //stdSearch
+        $('#q').bind('input',function(){
+            var resultObj = $('#student-list');
+            $.ajax({
+                type: 'GET',
+                url: '{{route('stdSearch')}}',
+                data: { q: this.value },
+                searchQuery:this.value,
+                resultObj: this.resultObj,
+                dataType:'json',
+                success: function (json) {
+                    //document.write(json["data"]);
+                    let dataObj = json.data;
+                    console.log(dataObj);
 
-        search.addWidget(
-                instantsearch.widgets.infiniteHits({
-                    container: '#student-list',
-                    hitsPerPage: 10,
-                    cssClasses: 'btn btn-default',
-                    templates: {
-                        item: function(data) {
-                            var techArray = data._highlightResult.techs.value.split(',');
-                            var techhtml = '';
+                    resultObj.html('');
+                    dataObj.forEach(function(element) {
+                        let output = Mustache.render(hitTemplate, element);
+                        $('#student-list').append(output);
 
+                    });
+                    resultObj.highlight(this.searchQuery);
+                    console.log(dataObj);
+                }
+            });
+        });
 
-                            techArray.forEach(function(tech) {
-                                techhtml = techhtml.concat('<span style="margin-bottom: 10px" class="label label-default">' + tech +'</span>');
-                            });
-
-                            return '<div class="item">' +
-                                    '<div class="list-group-item">' +
-                                    '<div class="row-picture">' +
-                                    '<img class="circle" src="img/student.jpg" alt="icon">' +
-                                    '</div>' +
-                                    '<div class="row-content">' +
-                                    '<h4 style="font-weight: 500;" class="list-group-item-heading">'+ data._highlightResult.firstName.value + ' ' +data._highlightResult.lastName.value + '</h4>' +
-                                    '<p class="list-group-item-text text-justify">'+data._highlightResult.objective.value+'</p>' +
-                                    techhtml +
-                                    '<a style="color: #00b0ff; float: right" onclick="viewProfile(\''+ data.index +'\');" class="btn btn-raised btn-xs">read more</a>' +
-                                    '</div>' +
-                                    '</div>' +
-                                    '<div class="list-group-separator"></div>' +
-                                    '</div>';
-                        }
-                    }
-                })
-        );
-
-        search.start();
-
-        search.templatesConfig.helpers.techs = function(/*text, render*/) {
-            var discount = this.price * 0.3;
-            return '$ -' + discount;
-        };
 
         function viewProfile(index){
             $('.modal').modal('show');
@@ -165,5 +140,11 @@
                 }
             });
         }
+
+
+        // Original JavaScript code by Chirp Internet: www.chirp.com.au
+        // Please acknowledge use of this code by including this header.
+
+
     </script>
 @endsection

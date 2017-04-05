@@ -20,7 +20,7 @@
                 <form method="post" enctype="multipart/form-data" action="{{ route('postProfileDetails') }}">
 
                     <div class="form-group">
-                        <label for="firstName"><a type="button" target="_blank" href="https://script.google.com/macros/s/AKfycbwm7YdFs-y5_MiPoeZcnUumQvcMh5VRPSdWFtk1CxJ7zq5TWQfH/exec" class="btn btn-default">Upload your CV</a></label>
+                        <label for="firstName"><a type="button" target="_blank" href="https://script.google.com/macros/s/AKfycbzWfOvMoHodSJpuGUisV32LX6M8iiYb4KHcHJ8Okkww8XBfaxs/exec" class="btn btn-default">Upload your CV</a></label>
                         <div>
                             @if(isset($_GET['link']))
                                 <a type="button" target="_blank" href="{{$_GET['link']}}">CV Link</a>
@@ -31,14 +31,8 @@
                         </div>
                     </div>
 
-                    @if(!isset($_GET['link']))
-                        for continue please upload ur cv first
-                    @endif
-
-                    @if(isset($_GET['link']))
-
                     <div class="col-md-2 selected_img">
-                        <img src="/profilepics/{{$thumbs[0]}}" alt="">
+                        <img src="/profilepics/{{$profile->profile_img}}" alt="">
                     </div>
 
                     <div class="form-group col-md-10">
@@ -46,8 +40,13 @@
 
                         <select id="select_profile_pic" class="image-picker show-html" name="profile_img">
                             @foreach($thumbs as $thumb)
+                                @if($profile->profile_img == $thumb)
                                 <img src="/profilepics/{{$thumb}}" alt="">
-                                <option data-img-src="/profilepics/{{$thumb}}" data-img-alt="{{$thumb}}" value="{{$thumb}}">  {{$thumb}}  </option>
+                                <option data-img-src="/profilepics/{{$thumb}}" selected data-img-alt="{{$thumb}}" value="{{$thumb}}">{{$thumb}}</option>
+                                @else
+                                    <img src="/profilepics/{{$thumb}}" alt="">
+                                    <option data-img-src="/profilepics/{{$thumb}}" data-img-alt="{{$thumb}}" value="{{$thumb}}">{{$thumb}}</option>
+                                @endif
                             @endforeach
                         </select>
 
@@ -56,7 +55,7 @@
 
                     <div class="form-group{{ $errors->has('firstName') ? ' has-error' : '' }}">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="Enter First Name" value="{{ old('firstName') }}" name="firstName">
+                        <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="Enter First Name" value="{{ old('firstName',$profile->firstName) }}" name="firstName">
                         @if ($errors->has('firstName'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('firstName') }}</strong>
@@ -67,7 +66,7 @@
 
                     <div class="form-group{{ $errors->has('lastName') ? ' has-error' : '' }}">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Enter email" value="{{ old('lastName') }}" name="lastName">
+                        <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Enter email" value="{{ old('lastName',$profile->lastName) }}" name="lastName">
                         @if ($errors->has('lastName'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('lastName') }}</strong>
@@ -78,7 +77,7 @@
 
                     <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                         <label for="phoneNo">Phone NO.</label>
-                        <input type="text" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter Phone Number" value="{{ old('phone') }}" name="phone">
+                        <input type="text" class="form-control" id="phone" aria-describedby="emailHelp" placeholder="Enter Phone Number" value="{{ old('phone', $profile->phone) }}" name="phone">
                         @if ($errors->has('phone'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('phone') }}</strong>
@@ -89,7 +88,7 @@
 
                     <div class="form-group{{ $errors->has('linkedin') ? ' has-error' : '' }}">
                         <label for="linkedinLink">LinkedIn</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Link" value="{{ old('linkedin') }}" name="linkedin">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Link" value="{{ old('linkedin', $profile->linkedinLink) }}" name="linkedin">
                         @if ($errors->has('linkedin'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('linkedin') }}</strong>
@@ -111,7 +110,7 @@
                 </div>
                 <div class="form-group{{ $errors->has('objective') ? ' has-error' : '' }}">
                     <label for="objective">Profile/Objective</label>
-                    <textarea class="form-control" id="objective" rows="3" placeholder="you have 50 - 500 characters to tell about you " value="{{ old('objective') }}" name="objective"></textarea>
+                    <textarea class="form-control" id="objective" rows="3" placeholder="you have 50 - 500 characters to tell about you " name="objective">{{ old('objective',$profile->objective) }}</textarea>
                     @if ($errors->has('objective'))
                         <span class="help-block">
                             <strong>{{ $errors->first('objective') }}</strong>
@@ -121,7 +120,7 @@
                     <div class="form-group{{ $errors->has('techskills') ? ' has-error' : '' }}">
                         <label for="techskills">Technical Skills</label>
                         {{--<textarea class="form-control" id="techskills" rows="3" name="techskills"></textarea>--}}
-                        <input type="text" class="form-control" placeholder="select or type: Java, PHP, etc..." id="tokenfield" name="techskills" value="{{ old('techskills') }}"/>
+                        <input type="text" class="form-control" placeholder="select or type: Java, PHP, etc..." id="tokenfield" name="techskills" value="{{ old('techskills',$profile->techs) }}"/>
                         @if ($errors->has('techskills'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('techskills') }}</strong>
@@ -133,7 +132,6 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
                     <input type="hidden" name="_token" value="{{Session::token()}}">
                 </div>
-                @endif
 
                 </form>
 

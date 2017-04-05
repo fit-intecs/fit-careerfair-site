@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => env('SCOUT_DRIVER', 'algolia'),
+    'driver' => env('SCOUT_DRIVER', 'tntsearch'),
 
     /*
     |--------------------------------------------------------------------------
@@ -57,6 +57,16 @@ return [
     'algolia' => [
         'id' => env('ALGOLIA_APP_ID', 'SJVT4MYY9W'),
         'secret' => env('ALGOLIA_SECRET', 'f2e306fc73b6e6359be2e96ff4719399'),
+    ],
+    'tntsearch' => [
+        'storage'  => storage_path(), //place where the index files will be stored
+        'fuzziness' => env('TNTSEARCH_FUZZINESS', true),
+        'fuzzy' => [
+            'prefix_length' => 2,
+            'max_expansions' => 50,
+            'distance' => 2
+        ],
+        'asYouType' => true,
     ],
 
 ];

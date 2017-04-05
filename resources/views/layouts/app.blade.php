@@ -61,11 +61,7 @@
                             @if(!(Auth::user()->role == 'admin'))
                                 <li>
                                 @if(\Illuminate\Support\Facades\Auth::user()->profile)
-                                        <a href="#" class="edit" style="color: #ffffff">Edit Details</a>
-
-                                @else
-
-                                        <a href="{{ route('addProfileDetails') }} " style="color: #ffffff">Add Details</a>
+                                        <a href="{{route('getEditProfileDetails')}}?link={{\Illuminate\Support\Facades\Auth::user()->profile->cv_link}}" class="asd" style="color: #ffffff">Edit Details</a>
                                 @endif
                                 </li>
                             @endif

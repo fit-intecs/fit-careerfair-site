@@ -16,6 +16,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 class UserController extends Controller{
@@ -35,17 +36,40 @@ class UserController extends Controller{
         return view('user-profile.add_user_profile_details',['thumbs'=>$thumbs]);
     }
 
+    public function getEditProfileDetails(){
+        $files = File::allFiles(public_path().'/profilepics/');
+
+        $thumbs = [];
+        foreach ($files as $file) {
+            $filename = $file->getFilename();
+            if(substr( $filename, 0, 3 ) === "TN_"){
+                array_push($thumbs,$file->getFilename());
+            }
+        }
+        $thumbs = array_values(array_sort($thumbs, function ($value) {
+            return $value;
+        }));
+
+        $profile = Auth::user()->profile;
+        return view('user-profile.edit_user_profile_details',['thumbs'=>$thumbs,'profile'=>$profile]);
+    }
+
     public function postAddUserProfileDetails(Request $request)
     {
-        $this->validate($request,[
 
+        $messages = [
+            'active_url' => ':attribute url is not a valid URL. (ex: http://www.linkedin.com/in/username)',
+        ];
+
+        $this->validate($request,[
             'firstName' => 'required',
             'lastName' => 'required',
             'phone' => 'required',
-            'linkedin' => 'required',
+            'linkedin' => 'active_url',
+            'cv_link' =>  'required|active_url',
             'objective' => 'required|min:50|max:500',
-            'techskills' => 'required|max:150'
-        ]);
+            'techskills' => 'required'
+        ],$messages);
 
         $firstName = $request['firstName'];
         $lastName = $request['lastName'];
@@ -56,19 +80,26 @@ class UserController extends Controller{
         $degree = $request['degree'];
         $userId = Auth::user()->id;
 
-        $profile = new Profile();
+        if(Auth::user()->profile){
+            $profile = Auth::user()->profile;
+        }else{
+            $profile = new Profile();
+        }
         $profile->firstName = $firstName;
         $profile->lastName = $lastName;
+        $profile->profile_img = $request['profile_img'];
         $profile->phone = $phone;
         $profile->linkedinLink = $linkedin;
         $profile->degree = $degree;
         $profile->objective = $objective;
         $profile->techs = $techskills;
         $profile->user_id = $userId;
-        $profile->achievement_id = 1;
-        $profile->final_project = 1;
+        $profile->cv_link = $request['cv_link'];
 
-        $profile->user()->associate(Auth::user());
+        if(!Auth::user()->profile){
+            $profile->user()->associate(Auth::user());
+        }
+
         $profile->save();
 
         return redirect()->route('home',['profileDetails'=> $profile]);
@@ -80,16 +111,31 @@ class UserController extends Controller{
         return new Response($file,200);
     }
 
+    public function getUserCV($filename)
+    {
+        $file = Storage::disk('local')->get($filename);
+        return new Response($file,200);
+    }
+
+    public function upload(Request $request)
+    {
+        //$uniqueFileName = uniqid() . $request->get('upload_file')->getClientOriginalName() . '.' . $request->get('upload_file')->getClientOriginalExtension());
+
+        $request->get('profile_img')->move(public_path('cvs') . Auth::user()->name.'.pdf');
+
+        return redirect()->back()->with('success', 'File uploaded successfully.');
+    }
+
     public function postEditProfile(Request $request)
     {
-
         $this->validate($request,[
             'firstName' => 'required',
             'lastName' => 'required',
             'phone' => 'required',
-            'linkedin' => 'required',
+            'linkedin' => 'active_url',
+            'cv_link' =>  'required|active_url',
             'objective' => 'required|min:50|max:500',
-            'techskills' => 'required|max:150'
+            'techskills' => 'required'
         ]);
 
         $authenticatedUserID = Auth::user()->id;
