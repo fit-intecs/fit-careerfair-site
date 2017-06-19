@@ -28,10 +28,14 @@ class UserController extends Controller{
         $thumbs = [];
         foreach ($files as $file) {
             $filename = $file->getFilename();
-            if(substr( $filename, 0, 3 ) === "TN_"){
+            if(substr( $filename, 0, 3 ) === "TN_" || substr( $filename, 0, 3 ) === "DF_"){
                 array_push($thumbs,$file->getFilename());
             }
         }
+
+        $thumbs = array_values(array_sort($thumbs, function ($value) {
+            return $value;
+        }));
 
         return view('user-profile.add_user_profile_details',['thumbs'=>$thumbs]);
     }
@@ -42,7 +46,7 @@ class UserController extends Controller{
         $thumbs = [];
         foreach ($files as $file) {
             $filename = $file->getFilename();
-            if(substr( $filename, 0, 3 ) === "TN_"){
+            if(substr( $filename, 0, 3 ) === "TN_" || substr( $filename, 0, 3 ) === "DF_"){
                 array_push($thumbs,$file->getFilename());
             }
         }
@@ -68,7 +72,8 @@ class UserController extends Controller{
             'linkedin' => 'active_url',
             'cv_link' =>  'required|active_url',
             'objective' => 'required|min:50|max:500',
-            'techskills' => 'required'
+            'techskills' => 'required',
+            'job_status' => 'required|in:available,hired'
         ],$messages);
 
         $firstName = $request['firstName'];
@@ -95,6 +100,7 @@ class UserController extends Controller{
         $profile->techs = $techskills;
         $profile->user_id = $userId;
         $profile->cv_link = $request['cv_link'];
+        $profile->job_status = $request['job_status'];
 
         if(!Auth::user()->profile){
             $profile->user()->associate(Auth::user());
@@ -135,7 +141,8 @@ class UserController extends Controller{
             'linkedin' => 'active_url',
             'cv_link' =>  'required|active_url',
             'objective' => 'required|min:50|max:500',
-            'techskills' => 'required'
+            'techskills' => 'required',
+            'job_status' => 'required|in:available,hired'
         ]);
 
         $authenticatedUserID = Auth::user()->id;
@@ -149,6 +156,7 @@ class UserController extends Controller{
         $profile->linkedinLink = $request['linkedin'];
         $profile->objective = $request['objective'];
         $profile->techs = $request['techskills'];
+        $profile->job_status = $request['job_status'];
 
         $profile->update();
         return response()->json(['firstName' => $profile->firstName, 'lastName'=> $profile->lastName, 'phone'=>$profile->phone,

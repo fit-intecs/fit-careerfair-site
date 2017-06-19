@@ -12,6 +12,10 @@ class Profile extends Model
 
     protected $appends = ["index"];
 
+    public function isHired(){
+        return ($this->job_status == 'hired') ? true : false ;
+    }
+
     public function getIndexAttribute()
     {
         return $this->user->name;

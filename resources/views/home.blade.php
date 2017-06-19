@@ -24,18 +24,14 @@
                                         <div class="row" style="margin-left: 10px;">
                                         <h3><div id="firstName">{{ $profileDetails->firstName }}</div> <div id="lastName"> {{$profileDetails->lastName}}</div></h3>
                                         </div>
-                                        @if (\Illuminate\Support\Facades\Storage::disk('local')->has(\Illuminate\Support\Str::upper(Auth::user()->name)  . '.jpg'))
-
-                                                <img src="{{ route('profile.image', ['filename' => \Illuminate\Support\Str::upper(Auth::user()->name) . '.jpg']) }}" alt="" class="img-responsive profile_img">
-                                        @else
-                                                <img src="/img/default-user.png" class="img-responsive profile_img">
-                                        @endif
+                                        <img src="/profilepics/{{$profileDetails->profile_img}}" class="img-responsive profile_img">
                                     </div>
 
                                     <div class="col-md-7 col-md-offset-1" style="margin-top: 70px;">
                                         <div class="jumbotron" style="margin: 20px; padding: 5px;">
                                         <div><strong>Phone Number: </strong></div> <p style="font-size: 1em" id="phone">{{ $profileDetails->phone }}</p>
                                         <div><strong>Degree: </strong></div> <p style="font-size: 1em" id="degree">{{ $profileDetails->degree }}</p>
+                                        <div><strong>Job Status: </strong></div> <p style="font-size: 1em" id="job">{{ $profileDetails->job_status }}</p>
                                         <div><strong>CV link: </strong></div> <p style="font-size: 1em" id="cv_link"><a target="_blank" href="{{ $profileDetails->cv_link  }}">PDF CV link</a></p>
                                         <div><strong>LinkedIn: </strong></div> <p style="font-size: 1em" id="linkedin"><a target="_blank" href="{{ $profileDetails->linkedinLink  }}">{{ $profileDetails->linkedinLink }}</a></p>
                                         </div>

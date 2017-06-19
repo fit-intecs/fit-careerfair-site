@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         //dd(Auth::user()->role);
         if(Auth::user()->status == 'first_time' && Auth::user()->role != 'admin'){
-            return redirect('/register');
+            return redirect(route('register'));
         }elseif(Auth::user()->role == 'admin'){
             return redirect(route('admin.dashboard'));
         }

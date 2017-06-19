@@ -52,6 +52,18 @@
 
                         <small id="emailHelp" class="form-text text-muted">Please select your one.</small>
                     </div>
+                    <div class="form-group{{ $errors->has('job_status') ? ' has-error' : '' }}">
+                        <label for="exampleSelect1">Are you available or hired ?</label>
+                        <select class="form-control" id="job_status" name="job_status">
+                            <option {{old('job_status',$profile->job_status)=="available"? 'selected':''}}  value="available">Available</option>
+                            <option {{old('job_status',$profile->job_status)=="hired"? 'selected':''}} value="hired">Hired</option>
+                        </select>
+                        @if ($errors->has('job_status'))
+                            <span class="help-block">
+                            <strong>{{ $errors->first('job_status') }}</strong>
+                        </span>
+                        @endif
+                    </div>
 
                     <div class="form-group{{ $errors->has('firstName') ? ' has-error' : '' }}">
                         <label for="firstName">First Name</label>

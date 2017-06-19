@@ -38,7 +38,7 @@ return [
     'twitter' => [
         'client_id' => 'tchXp9siW7B10CFJVAl1QmO9c',
         'client_secret' => '5zXuPCkGgDF71uAkTntB9pOBrOUgjrKbl0aJvMoS3fvIJWPYAK',
-        'redirect' => Config('app.url').'/callback/twitter',
+        'redirect' => Config('app.url').'/careers/callback/twitter',
         'white_list' => 'B12_tweet,cfairproject', //ex: B12_tweet,B13_tweet,B14_tweet
         // NB: do not add public twitter accounts
     ],

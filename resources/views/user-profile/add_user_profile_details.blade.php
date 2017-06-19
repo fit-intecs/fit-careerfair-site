@@ -38,7 +38,7 @@
                     @if(isset($_GET['link']))
 
                     <div class="col-md-2 selected_img">
-                        <img src="/profilepics/{{$thumbs[0]}}" alt="">
+                        <img src="/profilepics/{{old('profile_img',$thumbs[0])}}" alt="">
                     </div>
 
                     <div class="form-group col-md-10">
@@ -46,12 +46,32 @@
 
                         <select id="select_profile_pic" class="image-picker show-html" name="profile_img">
                             @foreach($thumbs as $thumb)
-                                <img src="/profilepics/{{$thumb}}" alt="">
-                                <option data-img-src="/profilepics/{{$thumb}}" data-img-alt="{{$thumb}}" value="{{$thumb}}">  {{$thumb}}  </option>
+
+
+                                @if(old('profile_img') == $thumb)
+                                    <img src="/profilepics/{{$thumb}}" alt="">
+                                    <option data-img-src="/profilepics/{{$thumb}}" selected data-img-alt="{{$thumb}}" value="{{$thumb}}">{{$thumb}}</option>
+                                @else
+                                    <img src="/profilepics/{{$thumb}}" alt="">
+                                    <option data-img-src="/profilepics/{{$thumb}}" data-img-alt="{{$thumb}}" value="{{$thumb}}">{{$thumb}}</option>
+                                @endif
                             @endforeach
                         </select>
 
                         <small id="emailHelp" class="form-text text-muted">Please select your one.</small>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('job_status') ? ' has-error' : '' }}">
+                        <label for="exampleSelect1">Are you available or hired ?</label>
+                        <select class="form-control" id="job_status" name="job_status">
+                            <option {{old('job_status')=="available"? 'selected':''}}  value="available">Available</option>
+                            <option {{old('job_status')=="hired"? 'selected':''}} value="hired">Hired</option>
+                        </select>
+                        @if ($errors->has('job_status'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('job_status') }}</strong>
+                    </span>
+                        @endif
                     </div>
 
                     <div class="form-group{{ $errors->has('firstName') ? ' has-error' : '' }}">
@@ -111,7 +131,7 @@
                 </div>
                 <div class="form-group{{ $errors->has('objective') ? ' has-error' : '' }}">
                     <label for="objective">Profile/Objective</label>
-                    <textarea class="form-control" id="objective" rows="3" placeholder="you have 50 - 500 characters to tell about you " value="{{ old('objective') }}" name="objective"></textarea>
+                    <textarea class="form-control" id="objective" rows="3" placeholder="you have 50 - 500 characters to tell about you " value="{{ old('objective') }}" name="objective">{{ old('objective') }}</textarea>
                     @if ($errors->has('objective'))
                         <span class="help-block">
                             <strong>{{ $errors->first('objective') }}</strong>

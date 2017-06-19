@@ -33,11 +33,11 @@ $factory->define(App\Profile::class, function (Faker\Generator $faker) {
         'phone' => $faker->phoneNumber,
         'degree' => $faker->randomElement(['IT' ,'ITM']),
         'linkedinLink' => $faker->url,
+        'profile_img' => "default-user.jpg",
+        'cv_link' => $faker->url,
         'objective' => $faker->paragraph(3),
         'techs' => str_replace([" ","."], [",",""], $faker->sentence),
         'user_id' => 1,
-        'achievement_id' => 1,
-        'final_project' => 1,
 
     ];
 });

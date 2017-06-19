@@ -40,7 +40,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="" href="{{ url('/') }}">
+                    <a class="" href="{{ route('root') }}">
                         <img style="display: inline;" src="{{ url('/img/mora_logo.png') }}" class="">
                         <div class="" style="display: inline-block; color: #ffffff"> {{ config('app.name', 'FIT-Career Fair 2017') }} </div>
                     </a>

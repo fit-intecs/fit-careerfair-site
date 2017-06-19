@@ -19,7 +19,7 @@ class RegisterStudentController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/register')
+            return redirect(route('register'))
                 ->withErrors($validator)
                 ->withInput();
         }

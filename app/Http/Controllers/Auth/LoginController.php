@@ -25,7 +25,8 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/careers/home';
+    protected $loginPath = '/careers/login';
 
     /**
      * Create a new controller instance.
@@ -40,5 +41,16 @@ class LoginController extends Controller
     public function username()
     {
         return 'name';
+    }
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect(route('root'));
     }
 }

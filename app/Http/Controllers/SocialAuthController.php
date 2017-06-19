@@ -79,10 +79,10 @@ class SocialAuthController extends Controller
             $user = $service->createOrGetUser($prov,$tmpUser,$isAdmin);
             auth()->login($user);
 
-            return redirect()->to('/home');
+            return redirect()->to(route('home'));
         }else{
 
-            return redirect()->to('/login')->with('status', 'This twitter account is not applicable to Sign up');;
+            return redirect()->to(route('login'))->with('status', 'This twitter account is not applicable to Sign up');;
         }
 
     }

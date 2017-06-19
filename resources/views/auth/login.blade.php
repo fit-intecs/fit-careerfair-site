@@ -8,6 +8,7 @@
                 <fieldset>
                     {{ csrf_field() }}
                     <legend><i class="fa fa-2x fa-graduation-cap"></i>Students Sign in</legend>
+
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="inputEmail" class="col-md-4 control-label">Index No</label>
 
@@ -44,8 +45,11 @@
 
                     <div class="form-group">
                         <div class="col-md-10 col-md-offset-2">
-                            <a type="button" href="/" class="btn btn-raised btn-default">Cancel</a>
-                            <button type="submit" class="btn btn-raised btn-primary">Login</button>
+                            <a type="button" href="{{route('root')}}" style="width: 45%" class="btn btn-raised btn-default">Cancel</a>
+                            <button type="submit" style="width: 45%; float: right" class="btn btn-raised btn-primary">Login</button>
+                            <a href="redirect/twitter" style="width: 100%; background-color: #1da1f2" class="btn btn-raised btn-lg"><i class="fa fa-twitter"></i> Sign in with Twitter</a>
+                        </div>
+                        <div class="col-md-10">
                         </div>
                     </div>
                 </fieldset>
